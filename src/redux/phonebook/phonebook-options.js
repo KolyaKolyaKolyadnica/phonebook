@@ -1,4 +1,5 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
+import axios from 'axios';
 
 const URL = 'https://63b432e99f50390584a9cbcd.mockapi.io/contacts';
 
@@ -40,5 +41,46 @@ export const deleteContact = createAsyncThunk(
     const contact = await response.json();
 
     return contact;
+  }
+);
+
+// ====================================
+
+// axios.defaults.baseURL = 'https://connections-api.herokuapp.com';
+
+// const token = {
+//   set(token) {
+//     axios.defaults.headers.common.Authorization = `Bearer ${token}`;
+//   },
+
+//   unset() {
+//     axios.defaults.headers.common.Authorization = '';
+//   },
+// };
+
+export const getUserContacts = createAsyncThunk(
+  'contacts/getUserContacts',
+  async () => {
+    const { data } = await axios.get('/contacts');
+
+    return data;
+  }
+);
+
+export const postUserContact = createAsyncThunk(
+  'contacts/postUserContact',
+  async newContact => {
+    const { data } = await axios.post('/contacts', newContact);
+
+    return data;
+  }
+);
+
+export const deleteUserContact = createAsyncThunk(
+  'contacts/deleteUserContact',
+  async contactId => {
+    const { data } = await axios.delete(`/contacts/${contactId}`, contactId);
+
+    return data;
   }
 );

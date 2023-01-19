@@ -2,7 +2,10 @@ import { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
-import { postContact } from '../../redux/phonebook/phonebook-options';
+import {
+  postContact,
+  postUserContact,
+} from '../../redux/phonebook/phonebook-options';
 import style from './ContactForm.module.css';
 
 class ContactForm extends Component {
@@ -65,7 +68,8 @@ class ContactForm extends Component {
 }
 
 const mapDispatchToProps = dispatch => ({
-  onSubmit: text => dispatch(postContact(text)),
+  onSubmit: text => dispatch(postUserContact(text)),
+  // onSubmit: text => dispatch(postContact(text)),
 });
 
 export default connect(null, mapDispatchToProps)(ContactForm);

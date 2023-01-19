@@ -4,12 +4,11 @@
   margin-top: 10px;
 
   display: flex;
-  flex-wrap: wrap;
+  /* flex-wrap: wrap; */
   align-items: center;
   justify-content: center;
 }
 .text {
-  margin-bottom: 10px;
 }
 
 .input {

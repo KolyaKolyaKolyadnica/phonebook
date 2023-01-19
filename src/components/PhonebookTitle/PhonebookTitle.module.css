@@ -1,0 +1,67 @@
+.container {
+  border: 1px solid #000;
+
+  display: flex;
+  /* align-items: center; */
+  justify-content: center;
+  flex-direction: column;
+
+  width: 50%;
+}
+.book {
+  height: 600px;
+  width: 80%;
+  background-color: rgb(231, 164, 106);
+  outline: 2px solid #000;
+
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+
+  /* overflow: hidden; */
+}
+.bookTitle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  height: 100px;
+  width: 50%;
+
+  outline: 2px solid rgb(0, 0, 0);
+}
+.stickerContainer {
+  position: relative;
+  height: 150px;
+  flex-grow: 1;
+
+  padding-top: 40px;
+
+  /* border: 1px solid #000; */
+  /* overflow: hidden; */
+}
+.sticker {
+  position: relative;
+  width: 200px;
+  height: 200px;
+  outline: 1px solid #000;
+}
+.green {
+  background-color: rgb(102, 239, 67);
+  transform: rotate(10deg) translate(30%, 0%);
+}
+.blue {
+  transform: rotate(310deg) translate(30%, -100%);
+  background-color: rgb(67, 216, 239);
+}
+.red {
+  transform: rotate(240deg) translate(60%, 100%);
+  background-color: rgb(239, 104, 67);
+}
+.yellow {
+  /* right: 50%;
+  top: 40px; */
+
+  transform: rotate(-15deg) translate(0%, -200%);
+  background-color: rgb(236, 239, 67);
+}

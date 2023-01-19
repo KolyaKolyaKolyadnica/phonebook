@@ -7,7 +7,7 @@ import style from './Filter.module.css';
 function Filter({ filterValue, onChangeFilter }) {
   return (
     <div className={style.container}>
-      <h3 className={style.text}>Find contacts by name:</h3>
+      <h3 className={style.text}>Find:</h3>
       <input
         type="text"
         name="name"
