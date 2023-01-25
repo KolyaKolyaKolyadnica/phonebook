@@ -1,9 +1,26 @@
-.container {
-  width: 100%;
+.email {
+  color: rgb(77, 56, 3);
+  font-weight: 500;
+}
+
+.logoutBtn {
   display: flex;
   align-items: center;
   justify-content: center;
-  /* flex-direction: column; */
+  flex-direction: row;
+  padding: 10px;
 
-  outline: 4px solid rgb(13, 255, 0);
+  color: rgb(0, 0, 0);
+
+  width: 70px;
+  height: 70px;
+}
+
+@media screen and (max-width: 460px) {
+  .email {
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 }

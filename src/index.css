@@ -1,5 +1,27 @@
 @import-normalize; /* bring in normalize.css styles */
 
+/* remove */
+@import url('https://fonts.googleapis.com/css2?family=Nerko+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Kalam:wght@300&family=Pacifico&display=swap');
+/* remove */
+
+@import url('https://fonts.googleapis.com/css2?family=Cabin+Sketch&family=Kalam&family=Permanent+Marker&display=swap');
+
+:root {
+  --folder: rgb(200, 166, 80);
+  --printedColor: rgb(89, 89, 89);
+  --writtenColor: rgb(10, 4, 128);
+
+  --red: rgb(164, 2, 2);
+
+  --printedFontFamily: 'Kalam', cursive;
+
+  --writtenFontFamily: 'Permanent Marker', cursive;
+
+  /* font-family: 'Nerko One', cursive; */
+  /* font-family: 'Pacifico', cursive; */
+}
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -9,9 +31,30 @@ body {
   -moz-osx-font-smoothing: grayscale;
 
   background-color: rgb(205, 204, 201);
+  overflow-x: hidden;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+input {
+  border: none;
+  border-bottom: 3px solid rgb(89, 89, 89);
+  background-color: rgba(255, 255, 255, 0);
+}
+button {
+  border: none;
+  background-color: rgba(0, 0, 0, 0);
+  background-color: none;
+  cursor: pointer;
+}
+
+button:hover {
+  transform: scale(1.1);
+}
+
+a {
+  color: black;
 }

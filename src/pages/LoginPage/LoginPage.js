@@ -64,6 +64,18 @@ const LoginPage = () => {
 
         <button className={style.login}>Log In</button>
       </form>
+
+      <div className={style.coment}>
+        <p className={style.comentText}>
+          If you want to come in -{' '}
+          <span className={style.palyanica}>say "palyanytsia"</span>
+          <br></br>
+          <span className={style.nowLogin}>Now only login :{'('}</span>
+          <span className={style.nowLogin2}></span>
+        </p>
+      </div>
+
+      <div className={style.decor}></div>
     </div>
   );
 };

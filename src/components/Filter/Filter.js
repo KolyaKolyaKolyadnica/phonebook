@@ -1,10 +1,23 @@
-import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
+import { useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
 
 import phonebookActions from 'redux/phonebook/phonebook-actions';
 import style from './Filter.module.css';
 
-function Filter({ filterValue, onChangeFilter }) {
+function Filter() {
+  const [value, setValue] = useState('');
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    setValue('');
+    dispatch(phonebookActions.filterByName(''));
+  }, []);
+
+  const changeInput = e => {
+    setValue(e.target.value);
+    dispatch(phonebookActions.filterByName(e.target.value));
+  };
+
   return (
     <div className={style.container}>
       <h3 className={style.text}>Find:</h3>
@@ -14,23 +27,12 @@ function Filter({ filterValue, onChangeFilter }) {
         pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
         title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
         required
-        onChange={onChangeFilter}
-        value={filterValue}
+        onChange={changeInput}
         className={style.input}
+        value={value}
       />
     </div>
   );
 }
-const mapStateToProps = state => ({ filterValue: state.phonebook.filter });
 
-const mapDispatchToProps = dispatch => ({
-  onChangeFilter: e =>
-    dispatch(phonebookActions.filterByName(e.currentTarget.value)),
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(Filter);
-
-Filter.propTypes = {
-  filterValue: PropTypes.string,
-  onChangeFilter: PropTypes.func,
-};
+export default Filter;

@@ -2,12 +2,10 @@ import { createReducer } from '@reduxjs/toolkit';
 import { combineReducers } from 'redux';
 import phonebookActions from './phonebook-actions';
 import {
-  getContacts,
-  postContact,
-  deleteContact,
   getUserContacts,
   postUserContact,
   deleteUserContact,
+  patchUserContact,
 } from './phonebook-options';
 
 const filter = createReducer('', builder => {
@@ -23,7 +21,12 @@ const userContacts = createReducer([], builder => {
     ])
     .addCase(deleteUserContact.fulfilled, (state, { payload }) =>
       state.filter(contact => contact.id !== payload.id)
-    );
+    )
+    .addCase(patchUserContact.fulfilled, (state, { payload }) => {
+      return state.map(contact =>
+        contact.id === payload.id ? payload : contact
+      );
+    });
 });
 
 const phonebookReducer = combineReducers({

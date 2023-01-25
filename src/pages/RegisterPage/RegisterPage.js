@@ -5,6 +5,7 @@ import authActions from '../../redux/auth/auth-actions';
 import { postNewUser } from 'redux/auth/auth-options';
 
 import style from './RegisterPage.module.css';
+import { Link } from 'react-router-dom';
 
 const RegisterPage = () => {
   const [username, setUsername] = useState('');
@@ -79,6 +80,12 @@ const RegisterPage = () => {
 
         <button className={style.signin}>Sign In</button>
       </form>
+
+      <div className={style.coment}>
+        <p className={style.comentText}>Who are you warrior?</p>
+      </div>
+
+      <div className={style.decor}></div>
     </div>
   );
 };

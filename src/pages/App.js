@@ -2,27 +2,19 @@ import { lazy, useEffect, Suspense } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Routes, Route } from 'react-router-dom';
 
+import { fetchCurrentUser } from 'redux/auth/auth-options';
 import style from './App.module.css';
 
-// import { Navigation } from '../components/Navigation/Navigation';
-// import { HomePage } from './HomePage/HomePage';
-// import { PhonebookPage } from './PhonebookPage/PhonebookPage';
-// import { LoginPage } from './LoginPage/LoginPage';
-// import { RegisterPage } from './RegisterPage/RegisterPage';
-// import { NotFoundPage } from './NotFoundPage/NotFoundPage';
+// Pages and Components
 import { PrivateRoute } from 'components/PrivateRoute/PrivateRoute';
 import { PublicRoute } from 'components/PublicRoute/PublicRoute';
-
-import { fetchCurrentUser } from 'redux/auth/auth-options';
-
+import Modal from 'components/Modal';
 const Navigation = lazy(() => import('../components/Navigation/Navigation'));
 const HomePage = lazy(() => import('./HomePage/HomePage'));
 const PhonebookPage = lazy(() => import('./PhonebookPage/PhonebookPage'));
 const LoginPage = lazy(() => import('./LoginPage/LoginPage'));
 const RegisterPage = lazy(() => import('./RegisterPage/RegisterPage'));
 const NotFoundPage = lazy(() => import('./NotFoundPage/NotFoundPage'));
-// const PrivateRoute = lazy(() => import('components/PrivateRoute/PrivateRoute'));
-// const PublicRoute = lazy(() => import('components/PublicRoute/PublicRoute'));
 
 function App() {
   const dispatch = useDispatch();
@@ -35,65 +27,64 @@ function App() {
   }, []);
 
   return (
-    <Suspense fallback={<h1>Loading...</h1>}>
-      {/* <div className={style.wrapper}>
-        <div className={style.container}> */}
+    <Suspense
+      fallback={
+        <Modal>
+          <h1>Loading...</h1>
+        </Modal>
+      }
+    >
+      <div className={style.wrapper}>
+        <div className={style.container}>
+          <Routes>
+            <Route path="/" element={<Navigation />}>
+              {!isFetchCurrentUser ? (
+                <>
+                  <Route
+                    index
+                    path="/"
+                    element={
+                      <PublicRoute>
+                        <HomePage />
+                      </PublicRoute>
+                    }
+                  ></Route>
 
-      {/* {!isFetchCurrentUser ? ( */}
+                  <Route
+                    path="contacts"
+                    element={
+                      <PrivateRoute>
+                        <PhonebookPage />
+                      </PrivateRoute>
+                    }
+                  ></Route>
 
-      <Routes>
-        <Route path="/" element={<Navigation />}>
-          {!isFetchCurrentUser ? (
-            <>
-              <Route
-                index
-                path="/"
-                element={
-                  <PublicRoute>
-                    <HomePage />
-                  </PublicRoute>
-                }
-              ></Route>
+                  <Route
+                    path="login"
+                    element={
+                      <PublicRoute restricted>
+                        <LoginPage />
+                      </PublicRoute>
+                    }
+                  ></Route>
+                  <Route
+                    path="register"
+                    element={
+                      <PublicRoute restricted>
+                        <RegisterPage />
+                      </PublicRoute>
+                    }
+                  ></Route>
 
-              <Route
-                path="contacts"
-                element={
-                  <PrivateRoute>
-                    <PhonebookPage />
-                  </PrivateRoute>
-                }
-              ></Route>
-
-              <Route
-                path="login"
-                element={
-                  <PublicRoute restricted>
-                    <LoginPage />
-                  </PublicRoute>
-                }
-              ></Route>
-              <Route
-                path="register"
-                element={
-                  <PublicRoute restricted>
-                    <RegisterPage />
-                  </PublicRoute>
-                }
-              ></Route>
-
-              <Route path="*" element={<NotFoundPage />}></Route>
-            </>
-          ) : (
-            <>Smth wrong!</>
-          )}
-        </Route>
-      </Routes>
-
-      {/* ) : ( <div>Smth wrong!</div>
-       )} */}
-
-      {/* </div>
-      </div> */}
+                  <Route path="*" element={<NotFoundPage />}></Route>
+                </>
+              ) : (
+                <>Smth wrong!</>
+              )}
+            </Route>
+          </Routes>
+        </div>
+      </div>
     </Suspense>
   );
 }

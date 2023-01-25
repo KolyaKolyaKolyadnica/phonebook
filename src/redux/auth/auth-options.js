@@ -18,40 +18,6 @@ const token = {
   },
 };
 
-// export const postNewUser = createAsyncThunk(
-//   'auth/authSignUp',
-//   async credentials => {
-//     const options = {
-//       method: 'POST',
-//       headers: {
-//         'Content-Type': 'application/json',
-//       },
-//       body: JSON.stringify(credentials),
-//     };
-
-//     const response = await fetch(`${URL}/users/signup`, options);
-//     const user = await response.json();
-//     return user;
-//   }
-// );
-// export const postLogin = createAsyncThunk(
-//   'auth/authLogIn',
-//   async credentials => {
-//     const options = {
-//       method: 'POST',
-//       headers: {
-//         'Content-Type': 'application/json',
-//       },
-//       body: JSON.stringify(credentials),
-//     };
-
-//     const response = await fetch(`${URL}/users/login`, options);
-
-//     const user = await response.json();
-//     return user;
-//   }
-// );
-
 export const postNewUser = createAsyncThunk(
   'auth/authSignUp',
   async credentials => {
