@@ -1,11 +1,9 @@
+import { Autocomplete, Button } from '@mui/material';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-
-import authActions from '../../redux/auth/auth-actions';
 import { postNewUser } from 'redux/auth/auth-options';
 
 import style from './RegisterPage.module.css';
-import { Link } from 'react-router-dom';
 
 const RegisterPage = () => {
   const [username, setUsername] = useState('');
@@ -78,7 +76,29 @@ const RegisterPage = () => {
         />
         <span>password</span>
 
-        <button className={style.signin}>Sign In</button>
+        {/* <Autocomplete
+          // disablePortal
+          // options={top100Films}
+          id="combo-box-demo"
+          sx={{ width: 300 }}
+          renderInput={params => (
+            <input
+              className={style.input}
+              type="password"
+              name="password"
+              placeholder="password"
+              autoComplete="on"
+              value={password}
+              onChange={changeInput}
+            />
+          )}
+        /> */}
+
+        <button className={style.signin}>
+          <Button variant="contained">Sign In</Button>
+        </button>
+
+        {/* <button className={style.signin}>Sign In</button> */}
       </form>
 
       <div className={style.coment}>

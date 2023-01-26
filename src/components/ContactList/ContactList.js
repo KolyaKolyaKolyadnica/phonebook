@@ -20,10 +20,11 @@ const STEP = 115;
 function ContactList() {
   const [showModal, setShowModal] = useState(false);
   const [editedContact, setEditedContact] = useState(null);
-  const [sheetHeight, setSheetHeight] = useState(400);
+  const [sheetHeight, setSheetHeight] = useState(null);
 
   const dispatch = useDispatch();
-  const refComponent = createRef();
+  const refList = createRef();
+  const refContainer = createRef();
 
   useEffect(() => {
     dispatch(getUserContacts());
@@ -38,14 +39,14 @@ function ContactList() {
       : contacts.filter(contact => contact.name.includes(filterValue));
 
   useEffect(() => {
-    if (visibleContacts.length !== 0) {
-      const height = refComponent.current.getBoundingClientRect().height;
+    const containerHeight = refContainer.current.getBoundingClientRect().height;
 
-      const bracersNumber = Math.floor(height / STEP);
+    console.log(Math.floor(containerHeight / STEP));
 
-      setSheetHeight(bracersNumber);
-    }
-  }, [refComponent, visibleContacts]);
+    Math.floor(containerHeight / (STEP + 15)) !== 0
+      ? setSheetHeight(Math.floor(containerHeight / STEP))
+      : setSheetHeight(3);
+  }, [refContainer, visibleContacts, filterValue]);
 
   const editContact = (id, name, number) => {
     setShowModal(true);
@@ -94,26 +95,28 @@ function ContactList() {
 
   return (
     <>
-      {visibleContacts.length === 0 ? (
-        <>
-          <Brace number={sheetHeight} step={STEP} />
-          <div className={style.notFound}>
-            <p className={style.p1}>No such people have been found.</p>
-            <p className={style.p2}>Maybe try something else?</p>
-            <p className={style.p3}>
-              Or is it a sign that it's time to <span>make new friends</span> :
-              {')'}
-            </p>
-          </div>
-        </>
-      ) : (
-        <>
-          <Brace number={sheetHeight} step={STEP} />
-          <ul className={style.list} ref={refComponent}>
-            {contactsListItems}
-          </ul>
-        </>
-      )}
+      <div className={style.refContainer} ref={refContainer}>
+        {visibleContacts.length === 0 ? (
+          <>
+            <Brace number={sheetHeight} step={STEP} />
+            <div className={style.notFound}>
+              <p className={style.p1}>No such people have been found.</p>
+              <p className={style.p2}>Maybe try something else?</p>
+              <p className={style.p3}>
+                Or is it a <span>sign</span> that it's time to
+                <span>make new friends</span> :D
+              </p>
+            </div>
+          </>
+        ) : (
+          <>
+            <Brace number={sheetHeight} step={STEP} />
+            <ul className={style.list} ref={refList}>
+              {contactsListItems}
+            </ul>
+          </>
+        )}
+      </div>
 
       {showModal && (
         <Modal onClose={() => setShowModal(!showModal)}>
