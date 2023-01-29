@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { IconContext } from 'react-icons';
 import { ImFolderPlus } from 'react-icons/im';
-import { Button, createTheme, ThemeProvider } from '@mui/material';
+import { Button, createTheme, ThemeProvider, Tooltip } from '@mui/material';
 
 // Pages and Components
 import ContactForm from 'components/ContactForm';
@@ -25,17 +25,18 @@ const PhonebookPage = () => {
 
   return (
     <>
-      <div className={style.container}>
-        <div className={style.decor}></div>
+      {/* <div className={style.container}> */}
+      <div className={style.decor}></div>
 
-        <div className={style.content}>
-          <header className={style.header}>
-            <div className={style.filterContainer}>
-              <Filter />
-            </div>
+      <div className={style.content}>
+        <header className={style.header}>
+          <div className={style.filterContainer}>
+            <Filter />
+          </div>
 
-            <div className={style.addNewContactContainer}>
-              <ThemeProvider theme={theme}>
+          <div className={style.addNewContactContainer}>
+            <ThemeProvider theme={theme}>
+              <Tooltip title="Add contacts" arrow>
                 <Button
                   color="neutral"
                   onClick={() => setShowModal(!showModal)}
@@ -46,13 +47,14 @@ const PhonebookPage = () => {
                     <ImFolderPlus />
                   </IconContext.Provider>
                 </Button>
-              </ThemeProvider>
-            </div>
-          </header>
+              </Tooltip>
+            </ThemeProvider>
+          </div>
+        </header>
 
-          <ContactList />
-        </div>
+        <ContactList />
       </div>
+      {/* </div> */}
 
       {showModal && (
         <Modal onClose={() => setShowModal(!showModal)}>

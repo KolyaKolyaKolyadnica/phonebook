@@ -1,11 +1,55 @@
-import { Autocomplete, Button } from '@mui/material';
+import {
+  FormControl,
+  InputAdornment,
+  InputLabel,
+  IconButton,
+  Input,
+  createTheme,
+  ThemeProvider,
+  Button,
+} from '@mui/material';
+import Visibility from '@mui/icons-material/Visibility';
+import VisibilityOff from '@mui/icons-material/VisibilityOff';
+
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { postNewUser } from 'redux/auth/auth-options';
 
 import style from './RegisterPage.module.css';
 
+const theme = createTheme({
+  typography: {
+    fontFamily: [
+      '-apple-system',
+      'BlinkMacSystemFont',
+      '"Segoe UI"',
+      'Roboto',
+      '"Helvetica Neue"',
+      'Arial',
+      'sans-serif',
+      '"Apple Color Emoji"',
+      '"Segoe UI Emoji"',
+      '"Segoe UI Symbol"',
+      'Permanent Marker',
+      'Indie Flower',
+    ].join(','),
+  },
+  palette: {
+    neutral: {
+      main: 'rgb(70, 70, 70)',
+    },
+  },
+});
+
 const RegisterPage = () => {
+  // mui password (start)
+  const [showPassword, setShowPassword] = useState(false);
+  const handleClickShowPassword = () => setShowPassword(show => !show);
+  const handleMouseDownPassword = event => {
+    event.preventDefault();
+  };
+  // mui password (end)
+
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -17,9 +61,9 @@ const RegisterPage = () => {
 
     dispatch(
       postNewUser({
-        name: e.target.username.value,
-        email: e.target.email.value,
-        password: e.target.password.value,
+        name: username,
+        email: email,
+        password: password,
       })
     );
 
@@ -28,77 +72,81 @@ const RegisterPage = () => {
     setPassword('');
   };
 
-  const changeInput = e => {
-    if (e.target.name === 'username') {
-      setUsername(e.target.value);
-    }
-
-    if (e.target.name === 'email') {
-      setEmail(e.target.value);
-    }
-
-    if (e.target.name === 'password') {
-      setPassword(e.target.value);
-    }
-  };
-
   return (
-    <div className={style.container}>
+    <>
+      {/* <div className={style.container}> */}
       <form className={style.form} onSubmit={submitForm}>
-        <input
-          className={style.text}
-          type="text"
-          name="username"
-          placeholder="username"
-          value={username}
-          onChange={changeInput}
-        />
-        <span>username</span>
-
-        <input
-          className={style.email}
-          type="email"
-          name="email"
-          placeholder="email"
-          value={email}
-          onChange={changeInput}
-        />
-        <span>email</span>
-
-        <input
-          className={style.input}
-          type="password"
-          name="password"
-          placeholder="password"
-          autoComplete="on"
-          value={password}
-          onChange={changeInput}
-        />
-        <span>password</span>
-
-        {/* <Autocomplete
-          // disablePortal
-          // options={top100Films}
-          id="combo-box-demo"
-          sx={{ width: 300 }}
-          renderInput={params => (
-            <input
-              className={style.input}
-              type="password"
-              name="password"
-              placeholder="password"
-              autoComplete="on"
-              value={password}
-              onChange={changeInput}
+        <ThemeProvider theme={theme}>
+          <FormControl
+            color="neutral"
+            variant="standard"
+            onChange={e => setUsername(e.target.value)}
+          >
+            <InputLabel>Username:</InputLabel>
+            <Input
+              sx={{
+                fontFamily: 'Indie Flower',
+              }}
             />
-          )}
-        /> */}
+          </FormControl>
+        </ThemeProvider>
 
-        <button className={style.signin}>
-          <Button variant="contained">Sign In</Button>
-        </button>
+        <ThemeProvider theme={theme}>
+          <FormControl
+            color="neutral"
+            variant="standard"
+            onChange={e => setEmail(e.target.value)}
+          >
+            <InputLabel>Email:</InputLabel>
+            <Input
+              sx={{
+                fontFamily: 'Indie Flower',
+              }}
+            />
+          </FormControl>
+        </ThemeProvider>
 
-        {/* <button className={style.signin}>Sign In</button> */}
+        <ThemeProvider theme={theme}>
+          <FormControl
+            color="neutral"
+            variant="standard"
+            onChange={e => setPassword(e.target.value)}
+          >
+            <InputLabel htmlFor="standard-adornment-password">
+              Password:
+            </InputLabel>
+            <Input
+              sx={{
+                fontFamily: 'Indie Flower',
+              }}
+              type={showPassword ? 'text' : 'password'}
+              endAdornment={
+                <InputAdornment position="end">
+                  <IconButton
+                    aria-label="toggle password visibility"
+                    onClick={handleClickShowPassword}
+                    onMouseDown={handleMouseDownPassword}
+                  >
+                    {showPassword ? <VisibilityOff /> : <Visibility />}
+                  </IconButton>
+                </InputAdornment>
+              }
+            />
+          </FormControl>
+        </ThemeProvider>
+
+        <ThemeProvider theme={theme}>
+          <Button
+            type="submit"
+            color="neutral"
+            variant="outlined"
+            sx={{
+              mt: '20px',
+            }}
+          >
+            Sign In
+          </Button>
+        </ThemeProvider>
       </form>
 
       <div className={style.coment}>
@@ -106,7 +154,8 @@ const RegisterPage = () => {
       </div>
 
       <div className={style.decor}></div>
-    </div>
+      {/* </div> */}
+    </>
   );
 };
 export default RegisterPage;

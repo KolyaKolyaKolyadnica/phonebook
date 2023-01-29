@@ -2,8 +2,9 @@ import style from './HomePage.module.css';
 
 const HomePage = () => {
   return (
-    <div className={style.container}>
-      <h1 className={style.title}>My Phonebook</h1>
+    <>
+      {/* <div className={style.container}> */}
+      {/* <h1 className={style.title}>My Phonebook</h1> */}
 
       <div className={style.content}>
         <p className={style.text}>
@@ -24,11 +25,11 @@ const HomePage = () => {
           <div className={style.line}></div>
           <div className={style.line}></div>
           <div className={style.line}></div>
-          <div className={style.line}></div>
         </div>
       </div>
       <div className={style.decor}></div>
-    </div>
+      {/* </div> */}
+    </>
   );
 };
 export default HomePage;

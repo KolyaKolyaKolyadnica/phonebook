@@ -22,7 +22,7 @@ const Navigation = () => {
           {authIsLoggedIn ? (
             <div className={style.linkContainer}>
               <Link to="/contacts" className={style.link}>
-                contacts
+                Contacts
                 <IconContext.Provider
                   value={{ size: '30px', color: 'rgb(211, 65, 65)' }}
                 >

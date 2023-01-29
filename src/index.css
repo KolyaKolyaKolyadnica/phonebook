@@ -4,6 +4,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Nerko+One&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Kalam:wght@300&family=Pacifico&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cabin+Sketch&family=Indie+Flower&family=Kalam&family=Permanent+Marker&display=swap');
 /* remove */
 
 @import url('https://fonts.googleapis.com/css2?family=Cabin+Sketch&family=Kalam&family=Permanent+Marker&display=swap');
@@ -17,7 +18,10 @@
 
   --printedFontFamily: 'Kalam', cursive;
 
-  --writtenFontFamily: 'Permanent Marker', cursive;
+  /* --writtenFontFamily: 'Permanent Marker', cursive; */
+  /* --writtenFontFamily: 'Kalam', cursive; */
+  /* --writtenFontFamily: 'Cabin Sketch', cursive; */
+  --writtenFontFamily: 'Indie Flower', cursive;
 
   /* font-family: 'Nerko One', cursive; */
   /* font-family: 'Pacifico', cursive; */
@@ -30,7 +34,6 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 
-  background-color: rgb(205, 204, 201);
   overflow-x: hidden;
 }
 

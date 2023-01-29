@@ -5,6 +5,8 @@ import { IconContext } from 'react-icons';
 import { VscChromeClose } from 'react-icons/vsc';
 import { GrEdit } from 'react-icons/gr';
 
+import { Tooltip } from '@mui/material';
+
 import {
   getUserContacts,
   deleteUserContact,
@@ -63,31 +65,35 @@ function ContactList() {
         </div>
 
         <div className={style.listItem__buttonBlock}>
-          <button
-            className={style.btn}
-            value={contact.id}
-            onClick={() =>
-              editContact(contact.id, contact.name, contact.number)
-            }
-          >
-            <IconContext.Provider
-              value={{ size: '30px', color: 'rgb(1, 65, 65)' }}
+          <Tooltip title="Edit" arrow>
+            <button
+              className={style.btn}
+              value={contact.id}
+              onClick={() =>
+                editContact(contact.id, contact.name, contact.number)
+              }
             >
-              <GrEdit />
-            </IconContext.Provider>
-          </button>
+              <IconContext.Provider
+                value={{ size: '30px', color: 'rgb(1, 65, 65)' }}
+              >
+                <GrEdit />
+              </IconContext.Provider>
+            </button>
+          </Tooltip>
 
-          <button
-            className={style.btn}
-            value={contact.id}
-            onClick={() => dispatch(deleteUserContact(contact.id))}
-          >
-            <IconContext.Provider
-              value={{ size: '40px', color: 'rgb(211, 65, 65)' }}
+          <Tooltip title="Delete" arrow>
+            <button
+              className={style.btn}
+              value={contact.id}
+              onClick={() => dispatch(deleteUserContact(contact.id))}
             >
-              <VscChromeClose />
-            </IconContext.Provider>
-          </button>
+              <IconContext.Provider
+                value={{ size: '40px', color: 'rgb(211, 65, 65)' }}
+              >
+                <VscChromeClose />
+              </IconContext.Provider>
+            </button>
+          </Tooltip>
         </div>
       </li>
     );

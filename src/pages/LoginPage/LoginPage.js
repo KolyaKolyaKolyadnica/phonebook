@@ -2,7 +2,6 @@ import {
   FormControl,
   InputAdornment,
   InputLabel,
-  TextField,
   IconButton,
   Input,
   createTheme,
@@ -10,7 +9,7 @@ import {
   Button,
 } from '@mui/material';
 import { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
@@ -18,13 +17,26 @@ import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import { postLogin } from 'redux/auth/auth-options';
 import style from './LoginPage.module.css';
 
-// 'Permanent Marker', cursive
-
 const theme = createTheme({
+  typography: {
+    fontFamily: [
+      '-apple-system',
+      'BlinkMacSystemFont',
+      '"Segoe UI"',
+      'Roboto',
+      '"Helvetica Neue"',
+      'Arial',
+      'sans-serif',
+      '"Apple Color Emoji"',
+      '"Segoe UI Emoji"',
+      '"Segoe UI Symbol"',
+      'Permanent Marker',
+      'Indie Flower',
+    ].join(','),
+  },
   palette: {
     neutral: {
-      main: 'rgb(89, 89, 89)',
-      // contrastText: 'rgb(0, 0, 0)',
+      main: 'rgb(70, 70, 70)',
     },
   },
 });
@@ -43,10 +55,6 @@ const LoginPage = () => {
 
   const dispatch = useDispatch();
 
-  const isFetchCurrentUser = useSelector(
-    state => state.auth.isFetchCurrentUser
-  );
-
   const submitForm = e => {
     e.preventDefault();
 
@@ -62,18 +70,21 @@ const LoginPage = () => {
   };
 
   return (
-    <div className={style.container}>
-      <h1 className={style.title}>Login Page</h1>
-
+    <>
       <form className={style.form} onSubmit={submitForm}>
         <ThemeProvider theme={theme}>
-          <TextField
-            id="outlined-basic"
-            label="Email:"
+          <FormControl
+            color="neutral"
             variant="standard"
             onChange={e => setEmail(e.target.value)}
-            color="neutral"
-          />
+          >
+            <InputLabel>Email:</InputLabel>
+            <Input
+              sx={{
+                fontFamily: 'Indie Flower',
+              }}
+            />
+          </FormControl>
         </ThemeProvider>
 
         <ThemeProvider theme={theme}>
@@ -86,7 +97,9 @@ const LoginPage = () => {
               Password:
             </InputLabel>
             <Input
-              // id="standard-adornment-password"
+              sx={{
+                fontFamily: 'Indie Flower',
+              }}
               type={showPassword ? 'text' : 'password'}
               endAdornment={
                 <InputAdornment position="end">
@@ -103,9 +116,9 @@ const LoginPage = () => {
           </FormControl>
         </ThemeProvider>
 
-        {/* <button className={style.login}>Log In</button> */}
         <ThemeProvider theme={theme}>
           <Button
+            type="submit"
             color="neutral"
             variant="outlined"
             sx={{
@@ -116,7 +129,6 @@ const LoginPage = () => {
           </Button>
         </ThemeProvider>
       </form>
-
       <div className={style.coment}>
         <p className={style.comentText}>
           If you want to come in -{' '}
@@ -126,9 +138,8 @@ const LoginPage = () => {
           <span className={style.nowLogin2}></span>
         </p>
       </div>
-
       <div className={style.decor}></div>
-    </div>
+    </>
   );
 };
 export default LoginPage;

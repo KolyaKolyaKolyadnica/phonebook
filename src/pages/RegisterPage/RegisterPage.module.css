@@ -1,4 +1,4 @@
-.container {
+/* .container {
   outline: 1px solid #000;
   height: 100%;
 
@@ -8,9 +8,10 @@
   flex-direction: column;
   position: relative;
   top: 1px;
-}
+} */
+
 .form {
-  border: 1px solid #000;
+  /* border: 1px solid #000; */
   display: flex;
   flex-direction: column;
   padding: 20px;
@@ -18,16 +19,14 @@
 
 .decor {
   position: absolute;
-  top: -1px;
-  left: 101px;
+  top: -5px;
+  left: 104px;
   height: 10px;
   width: 100px;
   background-color: var(--folder);
 }
 
 .coment {
-  /* border: 1px solid #000; */
-
   display: flex;
   justify-content: flex-end;
   width: 100%;
@@ -35,8 +34,6 @@
   font-family: var(--writtenFontFamily);
 }
 .comentText {
-  /* border: 1px solid #000; */
-
   width: 200px;
   font-size: 24px;
 

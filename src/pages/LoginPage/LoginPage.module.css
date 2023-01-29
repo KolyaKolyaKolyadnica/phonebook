@@ -1,6 +1,10 @@
-.container {
-  outline: 1px solid #000;
+/* .container {
+  outline: 1px solid rgb(255, 0, 0);
+
+  border: 1px solid #000;
+
   height: 100%;
+  width: 100%;
 
   display: flex;
   align-items: center;
@@ -9,7 +13,7 @@
 
   position: relative;
   top: 1px;
-}
+} */
 
 .title {
   font-family: 'Cabin Sketch', cursive;
@@ -20,13 +24,13 @@
   flex-direction: column;
   padding: 20px;
 
-  border: 2px solid #000;
+  /* border: 2px solid #000; */
 }
 
 .decor {
   position: absolute;
-  top: -1px;
-  left: 202px;
+  top: -5px;
+  left: 208px;
   height: 10px;
   width: 100px;
   background-color: var(--folder);
