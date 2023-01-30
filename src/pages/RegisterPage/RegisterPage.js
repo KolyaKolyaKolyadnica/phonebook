@@ -73,8 +73,7 @@ const RegisterPage = () => {
   };
 
   return (
-    <>
-      {/* <div className={style.container}> */}
+    <div className={style.container}>
       <form className={style.form} onSubmit={submitForm}>
         <ThemeProvider theme={theme}>
           <FormControl
@@ -154,8 +153,7 @@ const RegisterPage = () => {
       </div>
 
       <div className={style.decor}></div>
-      {/* </div> */}
-    </>
+    </div>
   );
 };
 export default RegisterPage;

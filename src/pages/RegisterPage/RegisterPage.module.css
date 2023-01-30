@@ -1,14 +1,17 @@
-/* .container {
-  outline: 1px solid #000;
-  height: 100%;
-
+.container {
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  position: relative;
-  top: 1px;
-} */
+
+  border: 2px solid #000;
+
+  width: 100%;
+  height: 100%;
+
+  background-color: var(--bgcReg);
+}
 
 .form {
   /* border: 1px solid #000; */
@@ -23,7 +26,7 @@
   left: 104px;
   height: 10px;
   width: 100px;
-  background-color: var(--folder);
+  background-color: var(--bgcReg);
 }
 
 .coment {
@@ -39,9 +42,17 @@
 
   text-align: center;
   transform: rotate(-30deg) translate(-30%, -30%);
-  color: rgb(17, 17, 112);
+  /* color: rgb(17, 17, 112); */
+  color: var(--writtenColor);
 }
 .link {
   text-decoration: none;
   color: red;
+}
+
+@media (max-width: 350px) {
+  .decor {
+    left: 84px;
+    width: 80px;
+  }
 }

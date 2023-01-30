@@ -1,7 +1,6 @@
 import { useState } from 'react';
-import { IconContext } from 'react-icons';
-import { ImFolderPlus } from 'react-icons/im';
 import { Button, createTheme, ThemeProvider, Tooltip } from '@mui/material';
+import CreateNewFolderIcon from '@mui/icons-material/CreateNewFolder';
 
 // Pages and Components
 import ContactForm from 'components/ContactForm';
@@ -15,7 +14,6 @@ const theme = createTheme({
   palette: {
     neutral: {
       main: 'rgb(89, 89, 89)',
-      // contrastText: 'rgb(0, 0, 0)',
     },
   },
 });
@@ -24,44 +22,39 @@ const PhonebookPage = () => {
   const [showModal, setShowModal] = useState(false);
 
   return (
-    <>
-      {/* <div className={style.container}> */}
+    <div className={style.container}>
       <div className={style.decor}></div>
 
       <div className={style.content}>
         <header className={style.header}>
-          <div className={style.filterContainer}>
-            <Filter />
-          </div>
+          <Filter />
 
-          <div className={style.addNewContactContainer}>
-            <ThemeProvider theme={theme}>
-              <Tooltip title="Add contacts" arrow>
-                <Button
-                  color="neutral"
-                  onClick={() => setShowModal(!showModal)}
-                >
-                  <IconContext.Provider
-                    value={{ size: '40px', color: 'rgb(89, 89, 89)' }}
-                  >
-                    <ImFolderPlus />
-                  </IconContext.Provider>
-                </Button>
-              </Tooltip>
-            </ThemeProvider>
-          </div>
+          <ThemeProvider theme={theme}>
+            <Tooltip
+              title="Add contacts"
+              arrow
+              sx={{
+                '&:hover .MuiSvgIcon-root': {
+                  color: 'rgb(25, 118, 210)',
+                },
+              }}
+            >
+              <Button color="neutral" onClick={() => setShowModal(!showModal)}>
+                <CreateNewFolderIcon sx={{ fontSize: 50 }} />
+              </Button>
+            </Tooltip>
+          </ThemeProvider>
         </header>
 
         <ContactList />
       </div>
-      {/* </div> */}
 
       {showModal && (
         <Modal onClose={() => setShowModal(!showModal)}>
           <ContactForm onClose={() => setShowModal(!showModal)} />
         </Modal>
       )}
-    </>
+    </div>
   );
 };
 export default PhonebookPage;

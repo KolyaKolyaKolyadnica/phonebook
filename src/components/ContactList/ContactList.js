@@ -43,8 +43,6 @@ function ContactList() {
   useEffect(() => {
     const containerHeight = refContainer.current.getBoundingClientRect().height;
 
-    console.log(Math.floor(containerHeight / STEP));
-
     Math.floor(containerHeight / (STEP + 15)) !== 0
       ? setSheetHeight(Math.floor(containerHeight / STEP))
       : setSheetHeight(3);

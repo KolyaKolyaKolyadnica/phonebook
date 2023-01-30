@@ -18,6 +18,7 @@
   height: 40%;
 }
 .title {
+  font-size: 18px;
 }
 .form {
   width: 100%;
@@ -30,57 +31,38 @@
   justify-content: center;
   flex-direction: column;
 }
-.form > div {
+.textFieldContainer {
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: 80%;
   margin-bottom: 10px;
-}
-.text {
-  font-weight: bold;
-  font-size: 16px;
-
-  display: block;
-  width: 25%;
-}
-.input {
-  height: 30px;
-  padding: 0 5px;
-
-  display: block;
-  width: 75%;
+  width: 80%;
 }
 .btnContainer {
   height: 30px;
+  width: 30px;
   margin-top: 10px;
 
   display: flex;
-  flex-direction: row;
-}
-
-.btn {
-  padding: 5px;
-
-  display: flex;
-  align-items: center;
   justify-content: center;
+  align-items: center;
+  flex-direction: row;
 
-  height: 30px;
-
-  border-radius: 3px;
-}
-.btn > span {
-  width: 70px;
+  border: 1px solid #000;
 }
 
-.space {
-  width: 35%;
+@media screen and (max-width: 450px) {
+  .container {
+    width: 300px;
+  }
+  .form {
+    width: 80%;
+  }
 }
-
-.saveBtn {
-}
-
-.saveBtn:hover {
-  box-shadow: 3px 3px 5px rgb(232, 232, 232), -3px -3px 5px rgb(232, 232, 232);
+@media screen and (max-width: 350px) {
+  .container {
+    height: 300px;
+    width: 250px;
+  }
 }

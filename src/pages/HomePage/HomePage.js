@@ -2,10 +2,7 @@ import style from './HomePage.module.css';
 
 const HomePage = () => {
   return (
-    <>
-      {/* <div className={style.container}> */}
-      {/* <h1 className={style.title}>My Phonebook</h1> */}
-
+    <div className={style.container}>
       <div className={style.content}>
         <p className={style.text}>
           A very useful application for storing contacts.
@@ -28,8 +25,7 @@ const HomePage = () => {
         </div>
       </div>
       <div className={style.decor}></div>
-      {/* </div> */}
-    </>
+    </div>
   );
 };
 export default HomePage;

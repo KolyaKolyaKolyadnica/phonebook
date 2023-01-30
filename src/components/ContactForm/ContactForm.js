@@ -1,14 +1,35 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { IconContext } from 'react-icons';
-import {
-  AiOutlinePlusCircle,
-  AiOutlineStop,
-  AiOutlinePlus,
-} from 'react-icons/ai';
+import { Button, ButtonGroup, Tooltip } from '@mui/material';
+import { ThemeProvider, TextField, createTheme } from '@mui/material';
+import CancelIcon from '@mui/icons-material/Cancel';
 
 import { postUserContact } from 'redux/phonebook/phonebook-options';
 import style from './ContactForm.module.css';
+
+const theme = createTheme({
+  typography: {
+    fontFamily: [
+      '-apple-system',
+      'BlinkMacSystemFont',
+      '"Segoe UI"',
+      'Roboto',
+      '"Helvetica Neue"',
+      'Arial',
+      'sans-serif',
+      '"Apple Color Emoji"',
+      '"Segoe UI Emoji"',
+      '"Segoe UI Symbol"',
+      'Permanent Marker',
+      'Indie Flower',
+    ].join(','),
+  },
+  palette: {
+    neutral: {
+      main: 'rgb(70, 70, 70)',
+    },
+  },
+});
 
 const ContactForm = ({ onClose }) => {
   const [name, setName] = useState('');
@@ -36,77 +57,83 @@ const ContactForm = ({ onClose }) => {
     <div className={style.container}>
       <div className={style.additionalSection}>
         <h2 className={style.title}>This card belongs to...</h2>
-        <div className={style.btnContainer}>
-          <button
-            type="button"
-            className={`${style.btn} ${style.closeBtn}`}
+
+        <Tooltip title="Close" arrow>
+          <Button
+            variant="text"
+            sx={{ border: 'none', color: 'rgb(164, 2, 2)' }}
             onClick={() => onClose()}
           >
-            <IconContext.Provider
-              value={{ size: '40px', color: 'rgb(211, 65, 65)' }}
-            >
-              <AiOutlineStop />
-            </IconContext.Provider>
-          </button>
-        </div>
+            <CancelIcon sx={{ fontSize: 40 }} />
+          </Button>
+        </Tooltip>
       </div>
 
       <form onSubmit={onSubmit} className={style.form}>
-        <div>
-          <p className={style.text}>Name</p>
-          <input
-            type="text"
-            name="name"
-            pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
-            title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
-            required
-            onChange={e => setName(e.currentTarget.value)}
-            value={name}
-            className={style.input}
-          />
+        <div className={style.textFieldContainer}>
+          <ThemeProvider theme={theme}>
+            <TextField
+              id="outlined-basic"
+              label="Name"
+              variant="outlined"
+              pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
+              placeholder="This field must not be empty"
+              required
+              onChange={e => setName(e.currentTarget.value)}
+              value={name}
+              sx={{
+                mb: '10px',
+                width: '230px',
+                '& .MuiOutlinedInput-input': {
+                  color: 'rgb(10, 4, 128)',
+                  fontFamily: 'Indie Flower',
+                },
+              }}
+            />
+          </ThemeProvider>
+
+          <ThemeProvider theme={theme}>
+            <TextField
+              id="outlined-basic"
+              label="Number"
+              variant="outlined"
+              pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
+              placeholder="This field must not be empty"
+              required
+              onChange={e => setNumber(e.currentTarget.value)}
+              value={number}
+              sx={{
+                width: '230px',
+                '& .MuiOutlinedInput-input': {
+                  color: 'rgb(10, 4, 128)',
+                  fontFamily: 'Indie Flower',
+                },
+              }}
+            />
+          </ThemeProvider>
         </div>
 
-        <div>
-          <p className={style.text}>Number</p>
-          <input
-            type="tel"
-            name="number"
-            pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
-            title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
-            required
-            onChange={e => setNumber(e.currentTarget.value)}
-            value={number}
-            className={style.input}
-          />
-        </div>
-
-        <div className={style.btnContainer}>
-          <button type="submit" className={`${style.btn} ${style.saveBtn}`}>
-            <span>Save and continue</span>
-            <IconContext.Provider
-              value={{ size: '30px', color: 'rgb(83, 182, 70)' }}
-            >
-              <AiOutlinePlus />
-            </IconContext.Provider>
-          </button>
-
-          <div className={style.space}></div>
-
-          <div className={style.test}>
-            <button
-              type="submit"
-              className={`${style.btn} ${style.saveBtn}`}
-              onClick={() => setIsClose(true)}
-            >
-              <span>Save and close</span>
-              <IconContext.Provider
-                value={{ size: '30px', color: 'rgb(83, 182, 70)' }}
-              >
-                <AiOutlinePlusCircle />
-              </IconContext.Provider>
-            </button>
-          </div>
-        </div>
+        <ButtonGroup
+          variant="outlined"
+          aria-label="outlined primary button group"
+          size="small"
+        >
+          <Button
+            sx={{ width: '50%', fontSize: '11px' }}
+            type="submit"
+            color="success"
+          >
+            Save and continue
+          </Button>
+          <Button
+            sx={{ width: '50%', fontSize: '11px' }}
+            type="submit"
+            onClick={() => setIsClose(true)}
+            color="warning"
+          >
+            Save and close
+          </Button>
+        </ButtonGroup>
       </form>
     </div>
   );

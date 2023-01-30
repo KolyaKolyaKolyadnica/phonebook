@@ -27,7 +27,7 @@
   border-bottom: 2px solid var(--printedColor);
 
   padding: 5px 5px 0px 5px;
-  margin-bottom: 12px;
+  margin-bottom: 21px;
 }
 
 .listItem__infoBlock {
@@ -56,6 +56,9 @@
 }
 .btn {
   flex-grow: 1;
+}
+.btn:hover {
+  transform: scale(1.1);
 }
 
 .notFound {

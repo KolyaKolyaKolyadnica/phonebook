@@ -70,7 +70,7 @@ const LoginPage = () => {
   };
 
   return (
-    <>
+    <div className={style.container}>
       <form className={style.form} onSubmit={submitForm}>
         <ThemeProvider theme={theme}>
           <FormControl
@@ -133,13 +133,11 @@ const LoginPage = () => {
         <p className={style.comentText}>
           If you want to come in -{' '}
           <span className={style.palyanica}>say "palyanytsia"</span>
-          <br></br>
           <span className={style.nowLogin}>Now only login :{'('}</span>
-          <span className={style.nowLogin2}></span>
         </p>
       </div>
       <div className={style.decor}></div>
-    </>
+    </div>
   );
 };
 export default LoginPage;

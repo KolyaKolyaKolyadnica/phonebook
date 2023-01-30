@@ -2,25 +2,5 @@
   display: flex;
   align-items: center;
   justify-content: center;
-}
-.text {
-  display: block;
-  color: var(--writtenFontFamily);
-  width: 20%;
-}
-
-.input {
-  display: block;
-  width: 80%;
-  height: 30px;
-  padding: 0 5px;
-  font-family: var(--writtenFontFamily);
-  color: var(--writtenColor);
-  font-size: 34px;
-}
-
-@media (max-width: 380px) {
-  .text {
-    font-size: 14px;
-  }
+  width: 300px;
 }

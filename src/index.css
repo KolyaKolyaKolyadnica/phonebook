@@ -10,21 +10,24 @@
 @import url('https://fonts.googleapis.com/css2?family=Cabin+Sketch&family=Kalam&family=Permanent+Marker&display=swap');
 
 :root {
-  --folder: rgb(200, 166, 80);
+  /* --folder: rgb(200, 166, 80); */
+  --folder: rgb(244, 205, 105);
+
   --printedColor: rgb(89, 89, 89);
-  --writtenColor: rgb(10, 4, 128);
+  /* --writtenColor: rgb(10, 4, 128); */
+  --writtenColor: rgb(25, 118, 210);
 
   --red: rgb(164, 2, 2);
 
   --printedFontFamily: 'Kalam', cursive;
 
-  /* --writtenFontFamily: 'Permanent Marker', cursive; */
-  /* --writtenFontFamily: 'Kalam', cursive; */
-  /* --writtenFontFamily: 'Cabin Sketch', cursive; */
   --writtenFontFamily: 'Indie Flower', cursive;
 
-  /* font-family: 'Nerko One', cursive; */
-  /* font-family: 'Pacifico', cursive; */
+  --bgcHome: rgb(244, 205, 105);
+  --bgcReg: rgb(170, 244, 105);
+  --bgcLog: rgb(105, 244, 207);
+  --bgcContacts: rgb(105, 161, 244);
+  --bgcNoFound: rgb(188, 105, 244);
 }
 body {
   margin: 0;
@@ -54,9 +57,9 @@ button {
   cursor: pointer;
 }
 
-button:hover {
+/* button:hover {
   transform: scale(1.1);
-}
+} */
 
 a {
   color: black;
