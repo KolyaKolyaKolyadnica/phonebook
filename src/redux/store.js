@@ -31,7 +31,7 @@ const middleware = [
 const phonebookPersistConfig = {
   key: 'contacts',
   storage,
-  blacklist: ['filter'],
+  blacklist: ['filter', 'userContactsError'],
 };
 const authPersistConfig = {
   key: 'auth',

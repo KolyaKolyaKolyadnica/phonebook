@@ -1,0 +1,21 @@
+.container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+
+  border: 2px solid #000;
+
+  width: 100%;
+  height: 100%;
+
+  background-color: var(--bgcNoFound);
+}
+.container > p {
+  color: var(--writtenColor);
+  font-family: var(--writtenFontFamily);
+  font-weight: bold;
+  font-size: large;
+  transform: rotate(-2deg);
+}

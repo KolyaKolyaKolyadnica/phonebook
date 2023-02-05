@@ -1,8 +1,5 @@
-import { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
 import { createTheme, ThemeProvider, TextField } from '@mui/material';
 
-import phonebookActions from 'redux/phonebook/phonebook-actions';
 import style from './Filter.module.css';
 
 const theme = createTheme({
@@ -29,13 +26,7 @@ const theme = createTheme({
   },
 });
 
-function Filter() {
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(phonebookActions.filterByName(''));
-  }, []);
-
+function Filter({ setFilterValue }) {
   return (
     <div className={style.container}>
       <ThemeProvider theme={theme}>
@@ -44,9 +35,7 @@ function Filter() {
           label="Find"
           variant="filled"
           placeholder="Some name..."
-          onChange={e =>
-            dispatch(phonebookActions.filterByName(e.target.value))
-          }
+          onChange={e => setFilterValue(e.target.value)}
           sx={{
             width: '80%',
             '& .MuiInputLabel-root': {

@@ -20,6 +20,7 @@ const theme = createTheme({
 
 const PhonebookPage = () => {
   const [showModal, setShowModal] = useState(false);
+  const [filterValue, setFilterValue] = useState('');
 
   return (
     <div className={style.container}>
@@ -27,7 +28,7 @@ const PhonebookPage = () => {
 
       <div className={style.content}>
         <header className={style.header}>
-          <Filter />
+          <Filter setFilterValue={setFilterValue} />
 
           <ThemeProvider theme={theme}>
             <Tooltip
@@ -46,7 +47,7 @@ const PhonebookPage = () => {
           </ThemeProvider>
         </header>
 
-        <ContactList />
+        <ContactList filterValue={filterValue} />
       </div>
 
       {showModal && (

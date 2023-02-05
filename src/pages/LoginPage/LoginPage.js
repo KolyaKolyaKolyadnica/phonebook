@@ -7,14 +7,19 @@ import {
   createTheme,
   ThemeProvider,
   Button,
+  FormHelperText,
 } from '@mui/material';
-import { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 
 import { postLogin } from 'redux/auth/auth-options';
+import authActions from 'redux/auth/auth-actions';
 import style from './LoginPage.module.css';
 
 const theme = createTheme({
@@ -55,6 +60,28 @@ const LoginPage = () => {
 
   const dispatch = useDispatch();
 
+  const error = useSelector(state => state.auth.error);
+
+  useEffect(() => {
+    if (!error) {
+      return;
+    }
+    if (email === '' || password === '') {
+      dispatch(authActions.errorClear());
+    }
+
+    toast.error(`${error}`, {
+      position: 'top-right',
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: 'colored',
+    });
+  }, [error]);
+
   const submitForm = e => {
     e.preventDefault();
 
@@ -77,13 +104,21 @@ const LoginPage = () => {
             color="neutral"
             variant="standard"
             onChange={e => setEmail(e.target.value)}
+            required
           >
             <InputLabel>Email:</InputLabel>
             <Input
               sx={{
                 fontFamily: 'Indie Flower',
               }}
+              inputProps={{
+                pattern: '^([a-zA-Z0-9_.-]+)@([a-z0-9_.-]+).([a-z.]{2,6})$',
+              }}
+              type="email"
             />
+            <FormHelperText id="component-helper-text">
+              Latin letters/numbers/symbols, one @-symbol, one or more dot
+            </FormHelperText>
           </FormControl>
         </ThemeProvider>
 
@@ -92,6 +127,7 @@ const LoginPage = () => {
             color="neutral"
             variant="standard"
             onChange={e => setPassword(e.target.value)}
+            required
           >
             <InputLabel htmlFor="standard-adornment-password">
               Password:
@@ -99,6 +135,9 @@ const LoginPage = () => {
             <Input
               sx={{
                 fontFamily: 'Indie Flower',
+              }}
+              inputProps={{
+                pattern: '^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[^ws]).{6,}',
               }}
               type={showPassword ? 'text' : 'password'}
               endAdornment={
@@ -113,6 +152,9 @@ const LoginPage = () => {
                 </InputAdornment>
               }
             />
+            <FormHelperText id="component-helper-text">
+              Min 6 any symbols. Required 'a-z', 'A-Z', '0-9'
+            </FormHelperText>
           </FormControl>
         </ThemeProvider>
 
@@ -129,6 +171,7 @@ const LoginPage = () => {
           </Button>
         </ThemeProvider>
       </form>
+
       <div className={style.coment}>
         <p className={style.comentText}>
           If you want to come in -{' '}

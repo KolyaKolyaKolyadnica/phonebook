@@ -5,7 +5,10 @@ import { IconContext } from 'react-icons';
 import { VscChromeClose } from 'react-icons/vsc';
 import { GrEdit } from 'react-icons/gr';
 
-import { Tooltip } from '@mui/material';
+import { CircularProgress, Tooltip } from '@mui/material';
+
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 import {
   getUserContacts,
@@ -16,24 +19,44 @@ import Modal from 'components/Modal';
 import Brace from 'components/Brace';
 
 import style from './ContactList.module.css';
+import phonebookActions from 'redux/phonebook/phonebook-actions';
 
-const STEP = 115;
-
-function ContactList() {
+function ContactList({ filterValue }) {
   const [showModal, setShowModal] = useState(false);
   const [editedContact, setEditedContact] = useState(null);
   const [sheetHeight, setSheetHeight] = useState(null);
 
   const dispatch = useDispatch();
-  const refList = createRef();
   const refContainer = createRef();
+
+  const contactsIsLoading = useSelector(
+    state => state.phonebook.userContactsLoading
+  );
+  const contacts = useSelector(state => state.phonebook.userContacts);
+  const userContactsError = useSelector(
+    state => state.phonebook.userContactsError
+  );
 
   useEffect(() => {
     dispatch(getUserContacts());
   }, [dispatch]);
 
-  const contacts = useSelector(state => state.phonebook.userContacts);
-  const filterValue = useSelector(state => state.phonebook.filter);
+  useEffect(() => {
+    if (userContactsError) {
+      toast.error(`${userContactsError}`, {
+        position: 'top-right',
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: 'colored',
+      });
+    }
+
+    dispatch(phonebookActions.clearError());
+  }, [userContactsError]);
 
   const visibleContacts =
     filterValue === ''
@@ -42,11 +65,39 @@ function ContactList() {
 
   useEffect(() => {
     const containerHeight = refContainer.current.getBoundingClientRect().height;
+    const step = 115;
 
-    Math.floor(containerHeight / (STEP + 15)) !== 0
-      ? setSheetHeight(Math.floor(containerHeight / STEP))
+    Math.floor(containerHeight / (step + 15)) > 3
+      ? setSheetHeight(Math.floor(containerHeight / step))
       : setSheetHeight(3);
   }, [refContainer, visibleContacts, filterValue]);
+
+  useEffect(() => {
+    if (contacts.length === 1) {
+      toast.success(`${contacts.length} contact successfully loaded`, {
+        position: 'top-right',
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: 'colored',
+      });
+    }
+    if (contacts.length > 1) {
+      toast.success(`${contacts.length} contacts successfully loaded`, {
+        position: 'top-right',
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: 'colored',
+      });
+    }
+  }, [dispatch]);
 
   const editContact = (id, name, number) => {
     setShowModal(true);
@@ -97,27 +148,53 @@ function ContactList() {
     );
   });
 
+  const zeroContacts = (
+    <div className={style.notFound}>
+      <p className={style.p1}>No contacts have been saved yet</p>
+      <p className={style.p2}>Time to fix it</p>
+      <p className={style.p3}>
+        Click on the <span>folder icon</span> at the top of the sheet
+      </p>
+    </div>
+  );
+  const zeroVisibleContacts = (
+    <div className={style.notFound}>
+      <p className={style.p1}>No such people have been found.</p>
+      <p className={style.p2}>Maybe try something else?</p>
+      <p className={style.p3}>
+        Or is it a <span>sign</span> that it's time to
+        <span>make new friends</span> :D
+      </p>
+    </div>
+  );
+
   return (
     <>
       <div className={style.refContainer} ref={refContainer}>
-        {visibleContacts.length === 0 ? (
-          <>
-            <Brace number={sheetHeight} step={STEP} />
-            <div className={style.notFound}>
-              <p className={style.p1}>No such people have been found.</p>
-              <p className={style.p2}>Maybe try something else?</p>
-              <p className={style.p3}>
-                Or is it a <span>sign</span> that it's time to
-                <span>make new friends</span> :D
-              </p>
-            </div>
-          </>
+        {contactsIsLoading ? (
+          <div className={style.loadContainer}>
+            <Brace number={sheetHeight} />
+            <p className={style.loadContainerText}>Searching...</p>
+            <CircularProgress />
+          </div>
         ) : (
           <>
-            <Brace number={sheetHeight} step={STEP} />
-            <ul className={style.list} ref={refList}>
-              {contactsListItems}
-            </ul>
+            {visibleContacts.length === 0 ? (
+              <>
+                <Brace number={sheetHeight} />
+
+                {contacts.length === 0 ? (
+                  <>{zeroContacts}</>
+                ) : (
+                  <>{zeroVisibleContacts}</>
+                )}
+              </>
+            ) : (
+              <>
+                <Brace number={sheetHeight} />
+                <ul className={style.list}>{contactsListItems}</ul>
+              </>
+            )}
           </>
         )}
       </div>

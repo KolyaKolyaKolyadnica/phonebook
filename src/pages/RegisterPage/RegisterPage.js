@@ -7,13 +7,18 @@ import {
   createTheme,
   ThemeProvider,
   Button,
+  FormHelperText,
 } from '@mui/material';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 
-import { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
+import { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { postNewUser } from 'redux/auth/auth-options';
+import authActions from 'redux/auth/auth-actions';
 
 import style from './RegisterPage.module.css';
 
@@ -56,6 +61,32 @@ const RegisterPage = () => {
 
   const dispatch = useDispatch();
 
+  const error = useSelector(state => state.auth.error);
+
+  useEffect(() => {
+    dispatch(authActions.errorClear());
+  }, []);
+
+  useEffect(() => {
+    if (!error) {
+      return;
+    }
+    if (username === '' || email === '' || password === '') {
+      dispatch(authActions.errorClear());
+    }
+
+    toast.error(`${error}`, {
+      position: 'top-right',
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: 'colored',
+    });
+  }, [error]);
+
   const submitForm = e => {
     e.preventDefault();
 
@@ -87,6 +118,9 @@ const RegisterPage = () => {
                 fontFamily: 'Indie Flower',
               }}
             />
+            <FormHelperText id="component-helper-text">
+              This is your life, enter whatever you want
+            </FormHelperText>
           </FormControl>
         </ThemeProvider>
 
@@ -101,7 +135,14 @@ const RegisterPage = () => {
               sx={{
                 fontFamily: 'Indie Flower',
               }}
+              inputProps={{
+                pattern: '^([a-zA-Z0-9_.-]+)@([a-z0-9_.-]+).([a-z.]{2,6})$',
+              }}
+              type="email"
             />
+            <FormHelperText id="component-helper-text">
+              Latin letters/numbers/symbols, one @-symbol, one or more dot
+            </FormHelperText>
           </FormControl>
         </ThemeProvider>
 
@@ -118,6 +159,9 @@ const RegisterPage = () => {
               sx={{
                 fontFamily: 'Indie Flower',
               }}
+              inputProps={{
+                pattern: '^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[^ws]).{6,}',
+              }}
               type={showPassword ? 'text' : 'password'}
               endAdornment={
                 <InputAdornment position="end">
@@ -131,6 +175,9 @@ const RegisterPage = () => {
                 </InputAdornment>
               }
             />
+            <FormHelperText id="component-helper-text">
+              Min 6 any symbols. Required 'a-z', 'A-Z', '0-9'
+            </FormHelperText>
           </FormControl>
         </ThemeProvider>
 

@@ -18,12 +18,8 @@ const UserMenu = () => {
   };
   return (
     <div className={style.container}>
-      {isLoggedIn ? (
-        <p className={style.email}>{email}</p>
-      ) : (
-        <></>
-        // <p className={style.email}>Welcome!</p>
-      )}
+      {/* {isLoggedIn && <p className={style.email}>dsa</p>} */}
+      {isLoggedIn && <p className={style.email}>{email}</p>}
 
       {isLoggedIn ? (
         <>

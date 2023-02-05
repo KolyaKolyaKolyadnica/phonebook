@@ -1,6 +1,6 @@
 .container {
   width: 400px;
-  height: 250px;
+  height: 300px;
 
   border-radius: 20px;
 
@@ -9,6 +9,8 @@
   flex-direction: column;
 
   background-color: #fff;
+  border: 2px solid rgb(0, 0, 0);
+  outline: 2px solid rgb(255, 255, 255);
 }
 .additionalSection {
   display: flex;

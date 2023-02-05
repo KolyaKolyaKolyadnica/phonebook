@@ -1,7 +1,9 @@
 import { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Button, ButtonGroup } from '@mui/material';
 import { ThemeProvider, TextField, createTheme } from '@mui/material';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 import { patchUserContact } from 'redux/phonebook/phonebook-options';
 import style from './EditContact.module.css';
@@ -36,8 +38,33 @@ const EditContact = ({ editedContact, onClose }) => {
   const [name, setName] = useState(editedContact.name);
   const [number, setNumber] = useState(editedContact.number);
 
+  const contacts = useSelector(state => state.phonebook.userContacts);
+
   const onSubmit = e => {
     e.preventDefault();
+
+    let uniqueName = true;
+    for (let i = 0; i < contacts.length; i += 1) {
+      if (contacts[i].name === name) {
+        uniqueName = false;
+        break;
+      }
+    }
+
+    if (!uniqueName) {
+      toast.warning(`This name already exists`, {
+        position: 'top-right',
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: 'colored',
+      });
+
+      return;
+    }
 
     dispatch(patchUserContact({ id: editedContact.id, name, number }));
 
@@ -55,8 +82,7 @@ const EditContact = ({ editedContact, onClose }) => {
               id="outlined-basic"
               label="Name"
               variant="outlined"
-              pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
-              placeholder="This field must not be empty"
+              placeholder="This field can`t be empty"
               required
               value={name}
               onChange={e => setName(e.currentTarget.value)}
@@ -76,8 +102,11 @@ const EditContact = ({ editedContact, onClose }) => {
               id="outlined-basic"
               label="Number"
               variant="outlined"
-              pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
-              placeholder="This field must not be empty"
+              inputProps={{
+                type: 'tel',
+                pattern: '[0-9]{3}-[0-9]{3}-[0-9]{4}',
+              }}
+              placeholder="This field can`t be empty"
               required
               value={number}
               onChange={e => setNumber(e.currentTarget.value)}
@@ -88,28 +117,30 @@ const EditContact = ({ editedContact, onClose }) => {
                   fontFamily: 'Indie Flower',
                 },
               }}
+              helperText="Format: 123-456-7890"
             />
           </ThemeProvider>
         </div>
 
         <ButtonGroup
-          variant="outlined"
-          aria-label="outlined primary button group"
+          variant="contained"
+          aria-label="contained primary button group"
           size="small"
+          sx={{ width: '80%' }}
         >
           <Button
             sx={{ width: '50%', fontSize: '11px' }}
             type="submit"
             color="success"
           >
-            ...yes, much better now!
+            ...much better!
           </Button>
           <Button
             sx={{ width: '50%', fontSize: '11px' }}
             onClick={() => onClose()}
             color="error"
           >
-            ...although no, it seemed!
+            ...although no!
           </Button>
         </ButtonGroup>
       </form>

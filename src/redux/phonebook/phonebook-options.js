@@ -3,42 +3,58 @@ import axios from 'axios';
 
 export const getUserContacts = createAsyncThunk(
   'contacts/getUserContacts',
-  async () => {
-    const { data } = await axios.get('/contacts');
+  async (_, thunkAPI) => {
+    try {
+      const { data } = await axios.get('/contacts');
 
-    return data;
+      return data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
   }
 );
 
 export const postUserContact = createAsyncThunk(
   'contacts/postUserContact',
-  async newContact => {
-    const { data } = await axios.post('/contacts', newContact);
+  async (newContact, thunkAPI) => {
+    try {
+      const { data } = await axios.post('/contacts', newContact);
 
-    return data;
+      return data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
   }
 );
 
 export const deleteUserContact = createAsyncThunk(
   'contacts/deleteUserContact',
-  async contactId => {
-    const { data } = await axios.delete(`/contacts/${contactId}`);
+  async (contactId, thunkAPI) => {
+    try {
+      const { data } = await axios.delete(`/contacts/${contactId}`);
 
-    return data;
+      return data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
   }
 );
 
 export const patchUserContact = createAsyncThunk(
   'contacts/patchUserContact',
-  async editedContact => {
+  async (editedContact, thunkAPI) => {
     const contactId = editedContact.id;
     const bodyRequest = {
       name: editedContact.name,
       number: editedContact.number,
     };
 
-    const { data } = await axios.patch(`/contacts/${contactId}`, bodyRequest);
+    try {
+      const { data } = await axios.patch(`/contacts/${contactId}`, bodyRequest);
 
-    return data;
+      return data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
   }
 );

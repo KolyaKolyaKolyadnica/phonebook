@@ -1,6 +1,4 @@
-import { createReducer, createSlice } from '@reduxjs/toolkit';
-import { combineReducers } from 'redux';
-import authActions from './auth-actions';
+import { createSlice } from '@reduxjs/toolkit';
 import {
   postNewUser,
   postLogin,
@@ -8,18 +6,26 @@ import {
   fetchCurrentUser,
 } from './auth-options';
 
+// import errorClear from './auth-actions';
+
 const initialState = {
   user: { name: null, email: null },
   isLoggedIn: false,
   token: null,
 
   isFetchCurrentUser: false,
+
+  error: null,
 };
 
 const authSlice = createSlice({
   name: 'auth',
   initialState,
-  reducers: {},
+  reducers: {
+    errorClear(state, action) {
+      state.error = null;
+    },
+  },
   extraReducers: builder => {
     builder
       .addCase(postNewUser.fulfilled, (state, action) => {
@@ -27,10 +33,16 @@ const authSlice = createSlice({
         state.token = action.payload.token;
         state.isLoggedIn = true;
       })
+      .addCase(postNewUser.rejected, (state, action) => {
+        state.error = action.payload;
+      })
       .addCase(postLogin.fulfilled, (state, action) => {
         state.user = action.payload.user;
         state.token = action.payload.token;
         state.isLoggedIn = true;
+      })
+      .addCase(postLogin.rejected, (state, action) => {
+        state.error = action.payload;
       })
       .addCase(postLogout.fulfilled, (state, action) => {
         state.user = { name: null, email: null };

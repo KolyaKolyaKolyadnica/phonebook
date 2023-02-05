@@ -1,7 +1,5 @@
 import { useSelector } from 'react-redux';
 import { Outlet, Link } from 'react-router-dom';
-import { IconContext } from 'react-icons';
-import { ImAddressBook } from 'react-icons/im';
 
 import UserMenu from 'components/UserMenu';
 import style from './Navigation.module.css';
@@ -23,11 +21,6 @@ const Navigation = () => {
             <div className={`${style.linkContainer} ${style.bgcContacts}`}>
               <Link to="/contacts" className={style.link}>
                 Contacts
-                <IconContext.Provider
-                  value={{ size: '30px', color: 'rgb(211, 65, 65)' }}
-                >
-                  <ImAddressBook />
-                </IconContext.Provider>
               </Link>
             </div>
           ) : (

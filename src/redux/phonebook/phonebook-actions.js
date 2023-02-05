@@ -1,8 +1,8 @@
 import { createAction } from '@reduxjs/toolkit';
 
-const filterByName = createAction('phonebook/filterByName');
+const clearError = createAction('phonebook/clearError');
 
 const phonebookActions = {
-  filterByName,
+  clearError,
 };
 export default phonebookActions;

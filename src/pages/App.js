@@ -1,15 +1,18 @@
 import { lazy, useEffect, Suspense } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Routes, Route } from 'react-router-dom';
+import { ToastContainer } from 'react-toastify';
 
 import { fetchCurrentUser } from 'redux/auth/auth-options';
 import style from './App.module.css';
 
 // Pages and Components
+import Navigation from '../components/Navigation/Navigation';
 import { PrivateRoute } from 'components/PrivateRoute/PrivateRoute';
 import { PublicRoute } from 'components/PublicRoute/PublicRoute';
-import Modal from 'components/Modal';
-const Navigation = lazy(() => import('../components/Navigation/Navigation'));
+// import Modal from 'components/Modal';
+
+// const Navigation = lazy(() => import('../components/Navigation/Navigation'));
 const HomePage = lazy(() => import('./HomePage/HomePage'));
 const PhonebookPage = lazy(() => import('./PhonebookPage/PhonebookPage'));
 const LoginPage = lazy(() => import('./LoginPage/LoginPage'));
@@ -27,15 +30,16 @@ function App() {
   }, []);
 
   return (
-    <Suspense
-      fallback={
-        <Modal>
-          <h1>Loading...</h1>
-        </Modal>
-      }
-    >
-      <div className={style.wrapper}>
-        <div className={style.container}>
+    <div className={style.wrapper}>
+      <div className={style.container}>
+        <Suspense
+          fallback={
+            // <Modal>
+            //   <h1>Loading...</h1>
+            // </Modal>
+            <h1>Loading...</h1>
+          }
+        >
           <Routes>
             <Route path="/" element={<Navigation />}>
               {!isFetchCurrentUser ? (
@@ -83,9 +87,11 @@ function App() {
               )}
             </Route>
           </Routes>
-        </div>
+        </Suspense>
+
+        <ToastContainer />
       </div>
-    </Suspense>
+    </div>
   );
 }
 

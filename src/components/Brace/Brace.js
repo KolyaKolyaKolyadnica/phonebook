@@ -1,6 +1,6 @@
 import style from './Brace.module.css';
 
-const Brace = ({ number, step = 100 }) => {
+const Brace = ({ number, step = 115 }) => {
   const bracers = Array.from(
     { length: Number(number) },
     (_, idx) => 135 + Number(step) * idx

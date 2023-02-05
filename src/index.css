@@ -27,7 +27,7 @@
   --bgcReg: rgb(170, 244, 105);
   --bgcLog: rgb(105, 244, 207);
   --bgcContacts: rgb(105, 161, 244);
-  --bgcNoFound: rgb(188, 105, 244);
+  --bgcNoFound: rgb(192, 197, 205);
 }
 body {
   margin: 0;

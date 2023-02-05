@@ -8,8 +8,20 @@ import {
   patchUserContact,
 } from './phonebook-options';
 
-const filter = createReducer('', builder => {
-  builder.addCase(phonebookActions.filterByName, (_, { payload }) => payload);
+const userContactsLoading = createReducer(false, builder => {
+  builder
+    .addCase(getUserContacts.fulfilled, () => false)
+    .addCase(getUserContacts.pending, () => true)
+    .addCase(getUserContacts.rejected, () => false);
+});
+
+const userContactsError = createReducer(null, builder => {
+  builder
+    .addCase(getUserContacts.rejected, (_, action) => action.payload)
+    .addCase(postUserContact.rejected, (_, action) => action.payload)
+    .addCase(deleteUserContact.rejected, (_, action) => action.payload)
+    .addCase(patchUserContact.rejected, (_, action) => action.payload)
+    .addCase(phonebookActions.clearError, () => null);
 });
 
 const userContacts = createReducer([], builder => {
@@ -30,7 +42,8 @@ const userContacts = createReducer([], builder => {
 });
 
 const phonebookReducer = combineReducers({
-  filter,
+  userContactsLoading,
+  userContactsError,
 
   userContacts,
 });
