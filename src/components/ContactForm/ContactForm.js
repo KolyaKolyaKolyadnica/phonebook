@@ -1,37 +1,13 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Button, ButtonGroup, Tooltip } from '@mui/material';
-import { ThemeProvider, TextField, createTheme } from '@mui/material';
+import { ThemeProvider, TextField } from '@mui/material';
 import CancelIcon from '@mui/icons-material/Cancel';
 import { toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 
 import { postUserContact } from 'redux/phonebook/phonebook-options';
+import theme from 'utils/mui-theme';
 import style from './ContactForm.module.css';
-
-const theme = createTheme({
-  typography: {
-    fontFamily: [
-      '-apple-system',
-      'BlinkMacSystemFont',
-      '"Segoe UI"',
-      'Roboto',
-      '"Helvetica Neue"',
-      'Arial',
-      'sans-serif',
-      '"Apple Color Emoji"',
-      '"Segoe UI Emoji"',
-      '"Segoe UI Symbol"',
-      'Permanent Marker',
-      'Indie Flower',
-    ].join(','),
-  },
-  palette: {
-    neutral: {
-      main: 'rgb(70, 70, 70)',
-    },
-  },
-});
 
 const ContactForm = ({ onClose }) => {
   const [name, setName] = useState('');

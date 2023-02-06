@@ -7,19 +7,18 @@
 @import url('https://fonts.googleapis.com/css2?family=Cabin+Sketch&family=Indie+Flower&family=Kalam&family=Permanent+Marker&display=swap');
 /* remove */
 
+@import url('https://fonts.googleapis.com/css2?family=Cabin+Sketch&family=Indie+Flower&family=Kalam&family=Permanent+Marker&family=Roboto&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Cabin+Sketch&family=Kalam&family=Permanent+Marker&display=swap');
 
 :root {
-  /* --folder: rgb(200, 166, 80); */
   --folder: rgb(244, 205, 105);
 
   --printedColor: rgb(89, 89, 89);
-  /* --writtenColor: rgb(10, 4, 128); */
   --writtenColor: rgb(25, 118, 210);
 
   --red: rgb(164, 2, 2);
 
-  --printedFontFamily: 'Kalam', cursive;
+  --printedFontFamily: 'Roboto';
 
   --writtenFontFamily: 'Indie Flower', cursive;
 
@@ -56,10 +55,6 @@ button {
   background-color: none;
   cursor: pointer;
 }
-
-/* button:hover {
-  transform: scale(1.1);
-} */
 
 a {
   color: black;

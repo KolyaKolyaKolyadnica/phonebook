@@ -1,22 +1,15 @@
 import { useState } from 'react';
-import { Button, createTheme, ThemeProvider, Tooltip } from '@mui/material';
+import { Button, ThemeProvider, Tooltip } from '@mui/material';
 import CreateNewFolderIcon from '@mui/icons-material/CreateNewFolder';
 
 // Pages and Components
 import ContactForm from 'components/ContactForm';
 import Filter from 'components/Filter';
-import ContactList from 'components/ContactList';
+import ContactsArea from 'components/ContactsArea';
 import Modal from 'components/Modal';
+import theme from 'utils/mui-theme';
 
 import style from './PhonebookPage.module.css';
-
-const theme = createTheme({
-  palette: {
-    neutral: {
-      main: 'rgb(89, 89, 89)',
-    },
-  },
-});
 
 const PhonebookPage = () => {
   const [showModal, setShowModal] = useState(false);
@@ -47,11 +40,14 @@ const PhonebookPage = () => {
           </ThemeProvider>
         </header>
 
-        <ContactList filterValue={filterValue} />
+        <ContactsArea filterValue={filterValue} />
       </div>
 
       {showModal && (
-        <Modal onClose={() => setShowModal(!showModal)}>
+        <Modal
+          onClose={() => setShowModal(!showModal)}
+          closeOnClickOverlay={false}
+        >
           <ContactForm onClose={() => setShowModal(!showModal)} />
         </Modal>
       )}

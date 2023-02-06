@@ -1,0 +1,20 @@
+.refContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  flex-grow: 1;
+}
+.loadContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 350px;
+  width: 100%;
+}
+.loadContainerText {
+  font-size: 56px;
+  font-weight: bold;
+  font-family: var(--writtenFontFamily);
+  color: var(--writtenColor);
+}

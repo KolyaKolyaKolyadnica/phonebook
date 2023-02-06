@@ -1,5 +1,5 @@
 import { useSelector } from 'react-redux';
-import { Navigate, redirect, Route } from 'react-router-dom';
+import { Navigate } from 'react-router-dom';
 
 export const PublicRoute = ({
   redirectPath = '/contacts',

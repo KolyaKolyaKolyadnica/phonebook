@@ -11,44 +11,39 @@ const Navigation = () => {
     <div className={style.container}>
       <header className={style.navigationHeader}>
         <nav>
-          <div className={`${style.linkContainer} ${style.bgcHome}`}>
-            <Link to="/" className={style.link}>
-              Home
-            </Link>
-          </div>
+          <Link to="/" className={`${style.linkContainer} ${style.bgcHome}`}>
+            Home
+          </Link>
 
           {authIsLoggedIn ? (
-            <div className={`${style.linkContainer} ${style.bgcContacts}`}>
-              <Link to="/contacts" className={style.link}>
-                Contacts
-              </Link>
-            </div>
+            <Link
+              to="/contacts"
+              className={`${style.linkContainer} ${style.bgcContacts}`}
+            >
+              Contacts
+            </Link>
           ) : (
             <>
-              <div className={`${style.linkContainer} ${style.bgcReg}`}>
-                <Link to="/register" className={style.link}>
-                  register
-                </Link>
-              </div>
-              <div className={`${style.linkContainer} ${style.bgcLog}`}>
-                <Link to="/login" className={style.link}>
-                  login
-                </Link>
-              </div>
+              <Link
+                to="/register"
+                className={`${style.linkContainer} ${style.bgcReg}`}
+              >
+                Register
+              </Link>
+              <Link
+                to="/login"
+                className={`${style.linkContainer} ${style.bgcLog}`}
+              >
+                Login
+              </Link>
             </>
           )}
         </nav>
 
-        <div className={style.userMenuContainer}>
-          <UserMenu />
-        </div>
+        <UserMenu />
       </header>
 
-      {/* <div className={style.content}> */}
       <Outlet />
-      {/* </div> */}
-
-      {/* <footer className={style.footer}>Это футер</footer>  */}
     </div>
   );
 };

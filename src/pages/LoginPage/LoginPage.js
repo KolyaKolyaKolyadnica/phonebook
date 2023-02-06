@@ -4,7 +4,6 @@ import {
   InputLabel,
   IconButton,
   Input,
-  createTheme,
   ThemeProvider,
   Button,
   FormHelperText,
@@ -20,31 +19,8 @@ import VisibilityOff from '@mui/icons-material/VisibilityOff';
 
 import { postLogin } from 'redux/auth/auth-options';
 import authActions from 'redux/auth/auth-actions';
+import theme from 'utils/mui-theme';
 import style from './LoginPage.module.css';
-
-const theme = createTheme({
-  typography: {
-    fontFamily: [
-      '-apple-system',
-      'BlinkMacSystemFont',
-      '"Segoe UI"',
-      'Roboto',
-      '"Helvetica Neue"',
-      'Arial',
-      'sans-serif',
-      '"Apple Color Emoji"',
-      '"Segoe UI Emoji"',
-      '"Segoe UI Symbol"',
-      'Permanent Marker',
-      'Indie Flower',
-    ].join(','),
-  },
-  palette: {
-    neutral: {
-      main: 'rgb(70, 70, 70)',
-    },
-  },
-});
 
 const LoginPage = () => {
   // mui password (start)

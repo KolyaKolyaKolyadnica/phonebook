@@ -10,6 +10,8 @@ import style from './App.module.css';
 import Navigation from '../components/Navigation/Navigation';
 import { PrivateRoute } from 'components/PrivateRoute/PrivateRoute';
 import { PublicRoute } from 'components/PublicRoute/PublicRoute';
+import SuspenseFallback from '../components/SuspenseFallback/SuspenseFallback';
+import { color } from '@mui/system';
 // import Modal from 'components/Modal';
 
 // const Navigation = lazy(() => import('../components/Navigation/Navigation'));
@@ -32,14 +34,7 @@ function App() {
   return (
     <div className={style.wrapper}>
       <div className={style.container}>
-        <Suspense
-          fallback={
-            // <Modal>
-            //   <h1>Loading...</h1>
-            // </Modal>
-            <h1>Loading...</h1>
-          }
-        >
+        <Suspense fallback={<SuspenseFallback />}>
           <Routes>
             <Route path="/" element={<Navigation />}>
               {!isFetchCurrentUser ? (

@@ -5,7 +5,7 @@ import style from './Modal.module.css';
 
 const modalRoot = document.querySelector('#modal-root');
 
-function Modal({ children, onClose }) {
+function Modal({ children, onClose, closeOnClickOverlay = true }) {
   const closeByEsc = e => {
     if (e.code === 'Escape') {
       onClose(e);
@@ -21,6 +21,8 @@ function Modal({ children, onClose }) {
   }, []);
 
   const clickOnOverlay = e => {
+    if (!closeOnClickOverlay) return;
+
     if (e.target === e.currentTarget) {
       onClose(e);
     }
