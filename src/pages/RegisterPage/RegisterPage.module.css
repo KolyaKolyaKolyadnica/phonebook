@@ -13,13 +13,6 @@
   background-color: var(--bgcReg);
 }
 
-.form {
-  /* border: 1px solid #000; */
-  display: flex;
-  flex-direction: column;
-  padding: 20px;
-}
-
 .decor {
   position: absolute;
   top: -5px;
@@ -42,12 +35,7 @@
 
   text-align: center;
   transform: rotate(-30deg) translate(-30%, -30%);
-  /* color: rgb(17, 17, 112); */
   color: var(--writtenColor);
-}
-.link {
-  text-decoration: none;
-  color: red;
 }
 
 @media (max-width: 350px) {

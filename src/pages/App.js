@@ -11,8 +11,6 @@ import Navigation from '../components/Navigation/Navigation';
 import { PrivateRoute } from 'components/PrivateRoute/PrivateRoute';
 import { PublicRoute } from 'components/PublicRoute/PublicRoute';
 import SuspenseFallback from '../components/SuspenseFallback/SuspenseFallback';
-import { color } from '@mui/system';
-// import Modal from 'components/Modal';
 
 // const Navigation = lazy(() => import('../components/Navigation/Navigation'));
 const HomePage = lazy(() => import('./HomePage/HomePage'));
