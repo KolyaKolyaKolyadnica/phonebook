@@ -109,7 +109,7 @@ const Form = ({ submitForm, setUsername = null, setEmail, setPassword }) => {
             mt: '20px',
           }}
         >
-          Sign In
+          {setUsername ? 'Sign In' : 'Log in'}
         </Button>
       </ThemeProvider>
     </form>

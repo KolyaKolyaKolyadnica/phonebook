@@ -18,27 +18,26 @@ const UserMenu = () => {
   };
   return (
     <div className={style.container}>
-      {isLoggedIn && <p className={style.email}>{email}</p>}
-
       {isLoggedIn ? (
-        <>
-          <Tooltip title="Log out" arrow>
-            <button className={style.logoutBtn} onClick={logOut}>
-              <IconContext.Provider
-                value={{ size: '40px', color: 'rgb(211, 65, 65)' }}
-              >
-                {/* <VscChromeClose /> */}
-                <IconContext.Provider
-                  value={{ size: '35px', color: 'rgb(44, 32, 2)' }}
-                >
-                  <RiLogoutBoxRLine />
-                </IconContext.Provider>
-              </IconContext.Provider>
-            </button>
-          </Tooltip>
-        </>
+        <p className={style.email}>{email}</p>
       ) : (
-        <div className={style.logoutBtn}></div>
+        <p className={style.email}>Welcome!</p>
+      )}
+
+      {isLoggedIn && (
+        <Tooltip title="Log out" arrow>
+          <button className={style.logoutBtn} onClick={logOut}>
+            <IconContext.Provider
+              value={{ size: '40px', color: 'rgb(211, 65, 65)' }}
+            >
+              <IconContext.Provider
+                value={{ size: '35px', color: 'rgb(44, 32, 2)' }}
+              >
+                <RiLogoutBoxRLine />
+              </IconContext.Provider>
+            </IconContext.Provider>
+          </button>
+        </Tooltip>
       )}
     </div>
   );

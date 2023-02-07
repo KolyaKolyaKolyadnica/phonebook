@@ -1,18 +1,16 @@
 import { createRef, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-
 import { CircularProgress } from '@mui/material';
-
 import { toast } from 'react-toastify';
 
 import { getUserContacts } from 'redux/phonebook/phonebook-options';
+import phonebookActions from 'redux/phonebook/phonebook-actions';
 import EditContact from '../EditContact';
 import Modal from 'components/Modal';
 import Brace from 'components/Brace';
 import Contact from '../ContactsList';
 import ZeroContacts from '../ZeroContacts';
 
-import phonebookActions from 'redux/phonebook/phonebook-actions';
 import style from './ContactsArea.module.css';
 
 function ContactsArea({ filterValue }) {

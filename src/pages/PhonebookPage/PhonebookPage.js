@@ -3,7 +3,7 @@ import { Button, ThemeProvider, Tooltip } from '@mui/material';
 import CreateNewFolderIcon from '@mui/icons-material/CreateNewFolder';
 
 // Pages and Components
-import ContactForm from 'components/ContactForm';
+import ContactForm from 'components/AddContact';
 import Filter from 'components/Filter';
 import ContactsArea from 'components/ContactsArea';
 import Modal from 'components/Modal';
