@@ -6,8 +6,6 @@ import {
   fetchCurrentUser,
 } from './auth-options';
 
-// import errorClear from './auth-actions';
-
 const initialState = {
   user: { name: null, email: null },
   isLoggedIn: false,
@@ -32,17 +30,27 @@ const authSlice = createSlice({
         state.user = action.payload.user;
         state.token = action.payload.token;
         state.isLoggedIn = true;
+        state.isFetchCurrentUser = false;
       })
       .addCase(postNewUser.rejected, (state, action) => {
         state.error = action.payload;
+        state.isFetchCurrentUser = false;
+      })
+      .addCase(postNewUser.pending, state => {
+        state.isFetchCurrentUser = true;
       })
       .addCase(postLogin.fulfilled, (state, action) => {
         state.user = action.payload.user;
         state.token = action.payload.token;
         state.isLoggedIn = true;
+        state.isFetchCurrentUser = false;
       })
       .addCase(postLogin.rejected, (state, action) => {
         state.error = action.payload;
+        state.isFetchCurrentUser = false;
+      })
+      .addCase(postLogin.pending, state => {
+        state.isFetchCurrentUser = true;
       })
       .addCase(postLogout.fulfilled, (state, action) => {
         state.user = { name: null, email: null };

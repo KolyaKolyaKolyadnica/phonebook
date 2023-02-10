@@ -2,8 +2,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { postLogout } from 'redux/auth/auth-options';
 import { IconContext } from 'react-icons';
 import { RiLogoutBoxRLine } from 'react-icons/ri';
-import style from './UserMenu.module.css';
 import { Tooltip } from '@mui/material';
+import style from './UserMenu.module.css';
 
 const UserMenu = () => {
   const dispatch = useDispatch();

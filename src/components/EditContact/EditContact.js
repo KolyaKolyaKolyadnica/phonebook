@@ -4,6 +4,7 @@ import { toast } from 'react-toastify';
 
 import { patchUserContact } from 'redux/phonebook/phonebook-options';
 import ContactForm from 'components/ContactForm';
+import toastOptions from 'utils/toast-options';
 import style from './EditContact.module.css';
 
 const EditContact = ({ editedContact, onClose }) => {
@@ -22,17 +23,7 @@ const EditContact = ({ editedContact, onClose }) => {
     );
 
     if (isUniqueContact) {
-      toast.warning(`This name already exists`, {
-        position: 'top-right',
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: 'colored',
-      });
-
+      toast.warning(`This name already exists`, toastOptions);
       return;
     }
 

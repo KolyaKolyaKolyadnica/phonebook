@@ -1,10 +1,11 @@
-import { toast } from 'react-toastify';
-
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { toast } from 'react-toastify';
+
 import { postNewUser } from 'redux/auth/auth-options';
 import authActions from 'redux/auth/auth-actions';
-import Form from 'components/Form';
+import EntranceForm from 'components/EntranceForm';
+import toastOptions from 'utils/toast-options';
 
 import style from './RegisterPage.module.css';
 
@@ -29,16 +30,7 @@ const RegisterPage = () => {
       dispatch(authActions.errorClear());
     }
 
-    toast.error(`${error}`, {
-      position: 'top-right',
-      autoClose: 5000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-      theme: 'colored',
-    });
+    toast.error(`${error}`, toastOptions);
   }, [error]);
 
   const submitForm = e => {
@@ -59,7 +51,7 @@ const RegisterPage = () => {
 
   return (
     <div className={style.container}>
-      <Form
+      <EntranceForm
         submitForm={submitForm}
         setUsername={setUsername}
         setEmail={setEmail}

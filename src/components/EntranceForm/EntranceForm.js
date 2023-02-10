@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useSelector } from 'react-redux';
 import {
   FormControl,
   InputAdornment,
@@ -12,9 +13,14 @@ import {
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import theme from 'utils/mui-theme';
-import style from './Form.module.css';
+import style from './EntranceForm.module.css';
 
-const Form = ({ submitForm, setUsername = null, setEmail, setPassword }) => {
+const EntranceForm = ({
+  submitForm,
+  setUsername = null,
+  setEmail,
+  setPassword,
+}) => {
   // mui password (start)
   const [showPassword, setShowPassword] = useState(false);
   const handleClickShowPassword = () => setShowPassword(show => !show);
@@ -22,6 +28,10 @@ const Form = ({ submitForm, setUsername = null, setEmail, setPassword }) => {
     event.preventDefault();
   };
   // mui password (end)
+
+  const isFetchCurrentUser = useSelector(
+    state => state.auth.isFetchCurrentUser
+  );
 
   return (
     <form className={style.form} onSubmit={submitForm}>
@@ -112,8 +122,10 @@ const Form = ({ submitForm, setUsername = null, setEmail, setPassword }) => {
           {setUsername ? 'Sign In' : 'Log in'}
         </Button>
       </ThemeProvider>
+
+      {isFetchCurrentUser && <div>dasdasdasadsads</div>}
     </form>
   );
 };
 
-export default Form;
+export default EntranceForm;

@@ -1,4 +1,4 @@
-import { CircularProgress, LinearProgress } from '@mui/material';
+import { LinearProgress } from '@mui/material';
 import { useSelector } from 'react-redux';
 import style from './SuspenseFallback.module.css';
 

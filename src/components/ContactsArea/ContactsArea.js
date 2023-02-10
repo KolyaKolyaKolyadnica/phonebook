@@ -10,16 +10,16 @@ import Modal from 'components/Modal';
 import Brace from 'components/Brace';
 import Contact from '../ContactsList';
 import ZeroContacts from '../ZeroContacts';
+import toastOptions from 'utils/toast-options';
+import useBrace from '../../hooks/useBrace';
 
 import style from './ContactsArea.module.css';
 
 function ContactsArea({ filterValue }) {
   const [showModal, setShowModal] = useState(false);
   const [editedContact, setEditedContact] = useState(null);
-  const [sheetHeight, setSheetHeight] = useState(null);
 
   const dispatch = useDispatch();
-  const refContainer = createRef();
 
   const contactsIsLoading = useSelector(
     state => state.phonebook.userContactsLoading
@@ -35,60 +35,32 @@ function ContactsArea({ filterValue }) {
           contact.name.toLowerCase().includes(filterValue.toLowerCase())
         );
 
+  const refContainer = createRef();
+  const bracersNumber = useBrace(refContainer, visibleContacts, filterValue);
+
   useEffect(() => {
     dispatch(getUserContacts());
   }, [dispatch]);
 
   useEffect(() => {
-    if (userContactsError) {
-      toast.error(`${userContactsError}`, {
-        position: 'top-right',
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: 'colored',
-      });
-    }
+    if (!userContactsError) return;
 
+    toast.error(`${userContactsError}`, toastOptions);
     dispatch(phonebookActions.clearError());
   }, [userContactsError]);
 
   useEffect(() => {
-    const containerHeight = refContainer.current.getBoundingClientRect().height;
-    const step = 115;
-
-    Math.floor(containerHeight / (step + 15)) > 3
-      ? setSheetHeight(Math.floor(containerHeight / step))
-      : setSheetHeight(3);
-  }, [refContainer, visibleContacts, filterValue]);
-
-  useEffect(() => {
     if (contacts.length === 1) {
-      toast.success(`${contacts.length} contact successfully loaded`, {
-        position: 'top-right',
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: 'colored',
-      });
+      toast.success(
+        `${contacts.length} contact successfully loaded`,
+        toastOptions
+      );
     }
     if (contacts.length > 1) {
-      toast.success(`${contacts.length} contacts successfully loaded`, {
-        position: 'top-right',
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: 'colored',
-      });
+      toast.success(
+        `${contacts.length} contacts successfully loaded`,
+        toastOptions
+      );
     }
   }, [dispatch]);
 
@@ -103,13 +75,13 @@ function ContactsArea({ filterValue }) {
       <div className={style.refContainer} ref={refContainer}>
         {contactsIsLoading ? (
           <div className={style.loadContainer}>
-            <Brace number={sheetHeight} />
+            <Brace number={bracersNumber} />
             <p className={style.loadContainerText}>Searching...</p>
             <CircularProgress />
           </div>
         ) : (
           <>
-            <Brace number={sheetHeight} />
+            <Brace number={bracersNumber} />
             {visibleContacts.length === 0 ? (
               <>
                 {contacts.length === 0 ? (

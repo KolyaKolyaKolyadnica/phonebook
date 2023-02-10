@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Button, Tooltip } from '@mui/material';
 import CancelIcon from '@mui/icons-material/Cancel';
 import { toast } from 'react-toastify';
+import toastOptions from 'utils/toast-options';
 
 import { postUserContact } from 'redux/phonebook/phonebook-options';
 
@@ -26,17 +27,7 @@ const AddContact = ({ onClose }) => {
     );
 
     if (isUniqueContact) {
-      toast.warning(`This name already exists`, {
-        position: 'top-right',
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: 'colored',
-      });
-
+      toast.warning(`This name already exists`, toastOptions);
       return;
     }
 
