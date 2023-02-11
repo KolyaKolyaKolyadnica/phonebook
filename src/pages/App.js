@@ -36,49 +36,43 @@ function App() {
         <Suspense fallback={<SuspenseFallback />}>
           <Routes>
             <Route path="/" element={<Navigation />}>
-              {!isFetchCurrentUser ? (
-                <>
-                  <Route
-                    index
-                    path="/"
-                    element={
-                      <PublicRoute>
-                        <HomePage />
-                      </PublicRoute>
-                    }
-                  ></Route>
+              <Route
+                index
+                path="/"
+                element={
+                  <PublicRoute>
+                    <HomePage />
+                  </PublicRoute>
+                }
+              ></Route>
 
-                  <Route
-                    path="contacts"
-                    element={
-                      <PrivateRoute>
-                        <PhonebookPage />
-                      </PrivateRoute>
-                    }
-                  ></Route>
+              <Route
+                path="contacts"
+                element={
+                  <PrivateRoute>
+                    <PhonebookPage />
+                  </PrivateRoute>
+                }
+              ></Route>
 
-                  <Route
-                    path="login"
-                    element={
-                      <PublicRoute restricted>
-                        <LoginPage />
-                      </PublicRoute>
-                    }
-                  ></Route>
-                  <Route
-                    path="register"
-                    element={
-                      <PublicRoute restricted>
-                        <RegisterPage />
-                      </PublicRoute>
-                    }
-                  ></Route>
+              <Route
+                path="login"
+                element={
+                  <PublicRoute restricted>
+                    <LoginPage />
+                  </PublicRoute>
+                }
+              ></Route>
+              <Route
+                path="register"
+                element={
+                  <PublicRoute restricted>
+                    <RegisterPage />
+                  </PublicRoute>
+                }
+              ></Route>
 
-                  <Route path="*" element={<NotFoundPage />}></Route>
-                </>
-              ) : (
-                <>Smth wrong!</>
-              )}
+              <Route path="*" element={<NotFoundPage />}></Route>
             </Route>
           </Routes>
         </Suspense>

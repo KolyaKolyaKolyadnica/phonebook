@@ -9,11 +9,13 @@ import {
   ThemeProvider,
   Button,
   FormHelperText,
+  CircularProgress,
 } from '@mui/material';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import theme from 'utils/mui-theme';
 import style from './EntranceForm.module.css';
+import { width } from '@mui/system';
 
 const EntranceForm = ({
   submitForm,
@@ -119,11 +121,15 @@ const EntranceForm = ({
             mt: '20px',
           }}
         >
-          {setUsername ? 'Sign In' : 'Log in'}
+          {isFetchCurrentUser ? (
+            <CircularProgress style={{ width: '25px', height: '25px' }} />
+          ) : setUsername ? (
+            'Sign In'
+          ) : (
+            'Log in'
+          )}
         </Button>
       </ThemeProvider>
-
-      {isFetchCurrentUser && <div>dasdasdasadsads</div>}
     </form>
   );
 };
