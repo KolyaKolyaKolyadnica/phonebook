@@ -69,16 +69,16 @@ const ContactForm = ({
         sx={{ width: '80%' }}
       >
         <Button
-          sx={{ width: '50%', fontSize: '11px' }}
+          sx={{ width: '50%', fontSize: '12px' }}
           type="submit"
           color="success"
         >
-          {setIsClose === 'edit' ? 'Save and continue' : '...much better!'}
+          {setIsClose ? 'Save and continue' : '...much better!'}
         </Button>
 
         {setIsClose ? (
           <Button
-            sx={{ width: '50%', fontSize: '11px' }}
+            sx={{ width: '50%', fontSize: '12px' }}
             type="submit"
             onClick={() => setIsClose(true)}
             color="warning"
@@ -87,7 +87,7 @@ const ContactForm = ({
           </Button>
         ) : (
           <Button
-            sx={{ width: '50%', fontSize: '11px' }}
+            sx={{ width: '50%', fontSize: '12px' }}
             onClick={() => onClose()}
             color="error"
           >

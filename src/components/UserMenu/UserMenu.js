@@ -9,7 +9,7 @@ const UserMenu = () => {
   const dispatch = useDispatch();
 
   const isLoggedIn = useSelector(state => state.auth.isLoggedIn);
-  const email = useSelector(state => state.auth.user.email);
+  const userData = useSelector(state => state.auth.user);
 
   const logOut = e => {
     e.preventDefault();
@@ -18,11 +18,9 @@ const UserMenu = () => {
   };
   return (
     <div className={style.container}>
-      {isLoggedIn ? (
-        <p className={style.email}>{email}</p>
-      ) : (
-        <p className={style.email}>Welcome!</p>
-      )}
+      <p className={style.email}>
+        {isLoggedIn && userData ? userData.email : 'Welcome!'}
+      </p>
 
       {isLoggedIn && (
         <Tooltip title="Log out" arrow>

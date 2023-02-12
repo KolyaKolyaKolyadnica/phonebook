@@ -2,9 +2,8 @@ import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Button, Tooltip } from '@mui/material';
 import CancelIcon from '@mui/icons-material/Cancel';
-import { toast } from 'react-toastify';
-import toastOptions from 'utils/toast-options';
 
+import checkIsContactUnique from 'js/checkIsContactUnique';
 import { postUserContact } from 'redux/phonebook/phonebook-options';
 
 import ContactForm from 'components/ContactForm';
@@ -22,12 +21,7 @@ const AddContact = ({ onClose }) => {
   const onSubmit = e => {
     e.preventDefault();
 
-    const isUniqueContact = contacts.some(
-      contact => contact.name === name && contact.number === number
-    );
-
-    if (isUniqueContact) {
-      toast.warning(`This name already exists`, toastOptions);
+    if (!checkIsContactUnique(name, number, contacts)) {
       return;
     }
 

@@ -19,7 +19,6 @@ function Filter({ setFilterValue }) {
               color: 'black',
             },
             '& .MuiFilledInput-input': {
-              // color: 'rgb(10, 4, 128)',
               color: 'rgb(25, 118, 210)',
               fontFamily: 'Indie Flower',
             },

@@ -1,10 +1,9 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { toast } from 'react-toastify';
+import checkIsContactUnique from 'js/checkIsContactUnique';
 
 import { patchUserContact } from 'redux/phonebook/phonebook-options';
 import ContactForm from 'components/ContactForm';
-import toastOptions from 'utils/toast-options';
 import style from './EditContact.module.css';
 
 const EditContact = ({ editedContact, onClose }) => {
@@ -18,12 +17,7 @@ const EditContact = ({ editedContact, onClose }) => {
   const onSubmit = e => {
     e.preventDefault();
 
-    const isUniqueContact = contacts.some(
-      contact => contact.name === name && contact.number === number
-    );
-
-    if (isUniqueContact) {
-      toast.warning(`This name already exists`, toastOptions);
+    if (!checkIsContactUnique(name, number, contacts)) {
       return;
     }
 
