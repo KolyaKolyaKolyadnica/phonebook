@@ -12,9 +12,9 @@ ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <Provider store={reduxStore.store}>
       <PersistGate loading={null} persistor={reduxStore.persistor}>
-        {/* <BrowserRouter basename="/react-hw-08-phonebook/"> */}
-        {/* <BrowserRouter basename="/react-hw-08-phonebook.com/"> */}
-        <BrowserRouter basename="/phonebook.com/">
+        <BrowserRouter basename="/react-hw-08-phonebook/">
+          {/* <BrowserRouter basename="/react-hw-08-phonebook.com/"> */}
+          {/* <BrowserRouter basename="/phonebook.com/"> */}
           <App />
         </BrowserRouter>
       </PersistGate>
