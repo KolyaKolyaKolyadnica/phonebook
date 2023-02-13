@@ -37,7 +37,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Navigation />}>
               <Route
-                index
+                // index
                 path="/"
                 element={
                   <PublicRoute>

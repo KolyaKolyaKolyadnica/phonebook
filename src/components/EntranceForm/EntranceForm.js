@@ -88,6 +88,7 @@ const EntranceForm = ({
             Password:
           </InputLabel>
           <Input
+            autoComplete="off"
             sx={{
               fontFamily: 'Indie Flower',
             }}

@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Button, Tooltip } from '@mui/material';
 import CancelIcon from '@mui/icons-material/Cancel';
 
-import checkIsContactUnique from 'js/checkIsContactUnique';
+import isContactUnique from 'js/isContactUnique';
 import { postUserContact } from 'redux/phonebook/phonebook-options';
 
 import ContactForm from 'components/ContactForm';
@@ -21,9 +21,11 @@ const AddContact = ({ onClose }) => {
   const onSubmit = e => {
     e.preventDefault();
 
-    if (!checkIsContactUnique(name, number, contacts)) {
-      return;
-    }
+    setName(name.trim());
+    console.log('___' + name.trim() + '___');
+
+    // if (!isContactNameValid(name)) return;
+    if (!isContactUnique(name, number, contacts)) return;
 
     dispatch(postUserContact({ name, number }));
 

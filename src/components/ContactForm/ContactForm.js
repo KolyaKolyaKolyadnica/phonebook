@@ -22,6 +22,9 @@ const ContactForm = ({
             id="outlined-basic"
             label="Name"
             variant="outlined"
+            inputProps={{
+              pattern: '^([a-zA-Z0-9_.-]).{1,20}',
+            }}
             placeholder="This field can`t be empty"
             required
             value={name}
@@ -34,6 +37,7 @@ const ContactForm = ({
                 fontFamily: 'Indie Flower',
               },
             }}
+            helperText="Should contain from 2 to 20 letters"
           />
         </ThemeProvider>
 

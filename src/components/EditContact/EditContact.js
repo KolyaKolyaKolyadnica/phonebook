@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import checkIsContactUnique from 'js/checkIsContactUnique';
 
+import isContactUnique from 'js/isContactUnique';
 import { patchUserContact } from 'redux/phonebook/phonebook-options';
 import ContactForm from 'components/ContactForm';
 import style from './EditContact.module.css';
@@ -17,7 +17,7 @@ const EditContact = ({ editedContact, onClose }) => {
   const onSubmit = e => {
     e.preventDefault();
 
-    if (!checkIsContactUnique(name, number, contacts)) {
+    if (!isContactUnique(name, number, contacts)) {
       return;
     }
 
