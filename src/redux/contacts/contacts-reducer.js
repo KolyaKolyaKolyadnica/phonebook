@@ -1,12 +1,12 @@
 import { createReducer } from '@reduxjs/toolkit';
 import { combineReducers } from 'redux';
-import phonebookActions from './phonebook-actions';
+import phonebookActions from './contacts-actions';
 import {
   getUserContacts,
   postUserContact,
   deleteUserContact,
   patchUserContact,
-} from './phonebook-options';
+} from './contacts-options';
 
 const userContactsLoading = createReducer(false, builder => {
   builder
@@ -41,11 +41,11 @@ const userContacts = createReducer([], builder => {
     });
 });
 
-const phonebookReducer = combineReducers({
+const contactsReducer = combineReducers({
   userContactsLoading,
   userContactsError,
 
   userContacts,
 });
 
-export default phonebookReducer;
+export default contactsReducer;

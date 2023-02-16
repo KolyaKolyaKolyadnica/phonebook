@@ -14,9 +14,8 @@ import {
   REGISTER,
 } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
-import logger from 'redux-logger';
 
-import phonebookReducer from './phonebook/phonebook-reducer';
+import contactsReducer from './contacts/contacts-reducer';
 import authReducer from './auth/auth-reducer';
 
 const middleware = [
@@ -25,10 +24,9 @@ const middleware = [
       ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
     },
   }),
-  // logger,
 ];
 
-const phonebookPersistConfig = {
+const contactsPersistConfig = {
   key: 'contacts',
   storage,
   blacklist: ['filter', 'userContactsError'],
@@ -41,7 +39,7 @@ const authPersistConfig = {
 
 const rootReducer = combineReducers({
   auth: persistReducer(authPersistConfig, authReducer),
-  phonebook: persistReducer(phonebookPersistConfig, phonebookReducer),
+  contacts: persistReducer(contactsPersistConfig, contactsReducer),
 });
 
 const store = configureStore({

@@ -3,8 +3,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Button, Tooltip } from '@mui/material';
 import CancelIcon from '@mui/icons-material/Cancel';
 
-import isContactUnique from 'js/isContactUnique';
-import { postUserContact } from 'redux/phonebook/phonebook-options';
+import isContactUnique from 'utils/isContactUnique';
+import { postUserContact } from 'redux/contacts/contacts-options';
 
 import ContactForm from 'components/ContactForm';
 import style from './AddContact.module.css';
@@ -14,7 +14,7 @@ const AddContact = ({ onClose }) => {
   const [number, setNumber] = useState('');
   const [isClose, setIsClose] = useState(false);
 
-  const contacts = useSelector(state => state.phonebook.userContacts);
+  const contacts = useSelector(state => state.contacts.userContacts);
 
   const dispatch = useDispatch();
 
@@ -22,15 +22,13 @@ const AddContact = ({ onClose }) => {
     e.preventDefault();
 
     setName(name.trim());
-    console.log('___' + name.trim() + '___');
 
-    // if (!isContactNameValid(name)) return;
-    if (!isContactUnique(name, number, contacts)) return;
+    if (isContactUnique(name.trim(), number, contacts)) {
+      dispatch(postUserContact({ name, number }));
 
-    dispatch(postUserContact({ name, number }));
-
-    setName('');
-    setNumber('');
+      setName('');
+      setNumber('');
+    }
 
     if (isClose) {
       setIsClose(false);

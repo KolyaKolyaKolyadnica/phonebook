@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { useSelector } from 'react-redux';
 import {
   FormControl,
@@ -14,8 +14,8 @@ import {
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import theme from 'utils/mui-theme';
+import isBtnDisable from 'utils/isBtnDisable';
 import style from './EntranceForm.module.css';
-import { width } from '@mui/system';
 
 const EntranceForm = ({
   submitForm,
@@ -35,6 +35,10 @@ const EntranceForm = ({
     state => state.auth.isFetchCurrentUser
   );
 
+  const refName = useRef(null);
+  const refEmail = useRef(null);
+  const refPas = useRef(null);
+
   return (
     <form className={style.form} onSubmit={submitForm}>
       {setUsername && (
@@ -49,6 +53,7 @@ const EntranceForm = ({
               sx={{
                 fontFamily: 'Indie Flower',
               }}
+              ref={refName}
             />
             <FormHelperText id="component-helper-text">
               This is your life, enter whatever you want
@@ -72,6 +77,7 @@ const EntranceForm = ({
               pattern: '^([a-zA-Z0-9_.-]+)@([a-z0-9_.-]+).([a-z.]{2,6})$',
             }}
             type="email"
+            ref={refEmail}
           />
           <FormHelperText id="component-helper-text">
             Latin letters/numbers/symbols, one @-symbol, one or more dot
@@ -96,6 +102,7 @@ const EntranceForm = ({
               pattern: '^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[^ws]).{6,}',
             }}
             type={showPassword ? 'text' : 'password'}
+            ref={refPas}
             endAdornment={
               <InputAdornment position="end">
                 <IconButton
@@ -121,6 +128,11 @@ const EntranceForm = ({
           sx={{
             mt: '20px',
           }}
+          disabled={
+            setUsername
+              ? isBtnDisable(refEmail, refPas, refName)
+              : isBtnDisable(refEmail, refPas)
+          }
         >
           {isFetchCurrentUser ? (
             <CircularProgress style={{ width: '25px', height: '25px' }} />

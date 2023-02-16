@@ -57,6 +57,9 @@ const authSlice = createSlice({
         state.token = null;
         state.isLoggedIn = false;
       })
+      .addCase(postLogout.rejected, (state, action) => {
+        state.error = action.payload;
+      })
       .addCase(fetchCurrentUser.pending, (state, action) => {
         state.isFetchCurrentUser = true;
       })
@@ -67,6 +70,7 @@ const authSlice = createSlice({
       })
       .addCase(fetchCurrentUser.rejected, (state, action) => {
         state.isFetchCurrentUser = false;
+        state.error = action.payload;
       });
   },
 });

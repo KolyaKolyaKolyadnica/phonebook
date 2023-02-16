@@ -1,5 +1,5 @@
 import { useDispatch } from 'react-redux';
-import { deleteUserContact } from 'redux/phonebook/phonebook-options';
+import { deleteUserContact } from 'redux/contacts/contacts-options';
 import { Tooltip } from '@mui/material';
 import { IconContext } from 'react-icons';
 import { VscChromeClose } from 'react-icons/vsc';

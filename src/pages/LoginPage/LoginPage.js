@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
 
 import { postLogin } from 'redux/auth/auth-options';
-import authActions from 'redux/auth/auth-actions';
 import EntranceForm from 'components/EntranceForm';
 import toastOptions from 'utils/toast-options';
 
@@ -18,14 +17,7 @@ const LoginPage = () => {
   const error = useSelector(state => state.auth.error);
 
   useEffect(() => {
-    if (!error) {
-      return;
-    }
-    if (email === '' || password === '') {
-      dispatch(authActions.errorClear());
-    }
-
-    toast.error(`${error}`, toastOptions);
+    if (error) toast.error(`${error}`, toastOptions);
   }, [error]);
 
   const submitForm = e => {

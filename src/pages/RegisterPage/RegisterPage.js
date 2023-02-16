@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
 
 import { postNewUser } from 'redux/auth/auth-options';
-import authActions from 'redux/auth/auth-actions';
 import EntranceForm from 'components/EntranceForm';
 import toastOptions from 'utils/toast-options';
 
@@ -19,19 +18,8 @@ const RegisterPage = () => {
   const error = useSelector(state => state.auth.error);
 
   useEffect(() => {
-    dispatch(authActions.errorClear());
-  }, []);
-
-  useEffect(() => {
-    if (!error) {
-      return;
-    }
-    if (username === '' || email === '' || password === '') {
-      dispatch(authActions.errorClear());
-    }
-
-    toast.error(`${error}`, toastOptions);
-  }, [error]);
+    if (error) toast.error(`${error}`, toastOptions);
+  }, [dispatch, error]);
 
   const submitForm = e => {
     e.preventDefault();

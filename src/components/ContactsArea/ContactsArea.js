@@ -3,8 +3,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { CircularProgress } from '@mui/material';
 import { toast } from 'react-toastify';
 
-import { getUserContacts } from 'redux/phonebook/phonebook-options';
-import phonebookActions from 'redux/phonebook/phonebook-actions';
+import { getUserContacts } from 'redux/contacts/contacts-options';
+import phonebookActions from 'redux/contacts/contacts-actions';
 import EditContact from '../EditContact';
 import Modal from 'components/Modal';
 import Brace from 'components/Brace';
@@ -22,11 +22,11 @@ function ContactsArea({ filterValue }) {
   const dispatch = useDispatch();
 
   const contactsIsLoading = useSelector(
-    state => state.phonebook.userContactsLoading
+    state => state.contacts.userContactsLoading
   );
-  const contacts = useSelector(state => state.phonebook.userContacts);
+  const contacts = useSelector(state => state.contacts.userContacts);
   const userContactsError = useSelector(
-    state => state.phonebook.userContactsError
+    state => state.contacts.userContactsError
   );
   const visibleContacts =
     filterValue === ''
@@ -47,7 +47,7 @@ function ContactsArea({ filterValue }) {
 
     toast.error(`${userContactsError}`, toastOptions);
     dispatch(phonebookActions.clearError());
-  }, [userContactsError]);
+  }, [userContactsError, dispatch]);
 
   useEffect(() => {
     if (contacts.length === 1) {
@@ -62,7 +62,7 @@ function ContactsArea({ filterValue }) {
         toastOptions
       );
     }
-  }, [dispatch]);
+  }, [dispatch, contacts.length]);
 
   const editContact = (id, name, number) => {
     setShowModal(true);
